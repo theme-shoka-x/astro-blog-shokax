@@ -1,10 +1,17 @@
 import type { NavItemType } from './components/navbar/NavTypes'
 import type { SidebarConfig } from './components/sidebar/SidebarTypes'
 
+interface BrandConfig {
+  title?: string
+  subtitle?: string
+  logo?: string
+}
+
 interface ShokaXThemeConfig {
   siteName: string
   nav: NavItemType[]
   sidebar?: SidebarConfig
+  brand?: BrandConfig
 }
 
 function defineConfig(config: ShokaXThemeConfig) {
@@ -48,6 +55,11 @@ export default defineConfig({
       ],
     },
   ],
+  brand: {
+    title: 'ShokaX',
+    subtitle: 'A modern blog theme',
+    logo: '✨',
+  },
   sidebar: {
     author: 'Your Name',
     description: 'A brief introduction',

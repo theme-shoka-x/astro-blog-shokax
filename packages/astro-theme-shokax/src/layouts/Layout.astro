@@ -1,5 +1,6 @@
 ---
 import NavBar from '../components/navbar/NavBar.svelte'
+import Brand from '../components/Brand.svelte'
 import Sidebar from '../components/sidebar/Sidebar.svelte'
 
 import themeConfig from '../theme.config.ts'
@@ -10,6 +11,7 @@ import '@/styles/style.css'
 const navLinks = themeConfig.nav
 const siteName = themeConfig.siteName
 const sidebarConfig = themeConfig.sidebar || {}
+const brandConfig = themeConfig.brand || {}
 ---
 
 <!doctype html>
@@ -23,6 +25,7 @@ const sidebarConfig = themeConfig.sidebar || {}
   </head>
   <body>
     <NavBar client:load name={siteName} navLinks={navLinks} clickToggleCallback={() => void 0} />
+    <Brand client:load title={brandConfig.title} subtitle={brandConfig.subtitle} logo={brandConfig.logo} />
     <main class="mt-12.5">
       <slot />
     </main>
