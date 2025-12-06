@@ -1,0 +1,20 @@
+/* HeaderCover 相关样式 */
+
+/* 针对无法用 UnoCSS 表达的复杂样式 */
+#imgs {
+  content-visibility: auto;
+  contain-intrinsic-size: 100vw 70vh;
+}
+
+/* 遮罩层过渡效果 */
+.imgs-overlay {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  #imgs {
+    height: 50vh;
+    min-height: 20rem;
+  }
+}

@@ -2,16 +2,19 @@
 import NavBar from '../components/navbar/NavBar.svelte'
 import Brand from '../components/Brand.svelte'
 import Sidebar from '../components/sidebar/Sidebar.svelte'
+import HeaderCover from '../components/HeaderCover.svelte'
 
 import themeConfig from '../theme.config.ts'
 
 import '@/styles/palette.css'
 import '@/styles/style.css'
+import '@/styles/header-cover.css'
 
 const navLinks = themeConfig.nav
 const siteName = themeConfig.siteName
 const sidebarConfig = themeConfig.sidebar || {}
 const brandConfig = themeConfig.brand || {}
+const coverConfig = themeConfig.cover || {}
 ---
 
 <!doctype html>
@@ -24,6 +27,15 @@ const brandConfig = themeConfig.brand || {}
     <title>Astro Basics</title>
   </head>
   <body>
+    <HeaderCover
+      client:load
+      enableCover={coverConfig.enableCover}
+      enablePreload={coverConfig.enablePreload}
+      fixedCover={coverConfig.fixedCover}
+      gradient={coverConfig.gradient}
+      covers={coverConfig.covers}
+      title={brandConfig.title}
+    />
     <NavBar client:load name={siteName} navLinks={navLinks} clickToggleCallback={() => void 0} />
     <Brand client:load title={brandConfig.title} subtitle={brandConfig.subtitle} logo={brandConfig.logo} />
     <main class="mt-12.5">

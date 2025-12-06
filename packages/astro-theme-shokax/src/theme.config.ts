@@ -7,11 +7,20 @@ interface BrandConfig {
   logo?: string
 }
 
+interface CoverConfig {
+  enableCover?: boolean
+  enablePreload?: boolean
+  fixedCover?: string
+  gradient?: boolean
+  covers?: string[]
+}
+
 interface ShokaXThemeConfig {
   siteName: string
   nav: NavItemType[]
   sidebar?: SidebarConfig
   brand?: BrandConfig
+  cover?: CoverConfig
 }
 
 function defineConfig(config: ShokaXThemeConfig) {
@@ -59,6 +68,20 @@ export default defineConfig({
     title: 'ShokaX',
     subtitle: 'A modern blog theme',
     logo: '✨',
+  },
+  cover: {
+    enableCover: true,
+    enablePreload: true,
+    // fixedCover: '/path/to/cover.jpg', // 固定封面模式
+    // gradient: true, // 渐变模式
+    covers: [
+      'https://picsum.photos/1920/1080?random=1',
+      'https://picsum.photos/1920/1080?random=2',
+      'https://picsum.photos/1920/1080?random=3',
+      'https://picsum.photos/1920/1080?random=4',
+      'https://picsum.photos/1920/1080?random=5',
+      'https://picsum.photos/1920/1080?random=6',
+    ],
   },
   sidebar: {
     author: 'Your Name',
