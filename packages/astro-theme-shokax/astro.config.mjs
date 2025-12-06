@@ -1,10 +1,10 @@
+import svelte from '@astrojs/svelte'
 import vue from '@astrojs/vue'
+
 // @ts-check
 import { defineConfig } from 'astro/config'
 
 import UnoCSS from 'unocss/astro'
-
-import svelte from '@astrojs/svelte';
 
 // https://astro.build/config
 export default defineConfig({

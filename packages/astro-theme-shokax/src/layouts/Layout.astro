@@ -1,5 +1,6 @@
 ---
 import NavBar from '../components/navbar/NavBar.svelte'
+import Sidebar from '../components/sidebar/Sidebar.svelte'
 
 import themeConfig from '../theme.config.ts'
 
@@ -8,6 +9,7 @@ import '@/styles/style.css'
 
 const navLinks = themeConfig.nav
 const siteName = themeConfig.siteName
+const sidebarConfig = themeConfig.sidebar || {}
 ---
 
 <!doctype html>
@@ -24,6 +26,7 @@ const siteName = themeConfig.siteName
     <main class="mt-12.5">
       <slot />
     </main>
+    <Sidebar client:load config={sidebarConfig} navLinks={navLinks} />
   </body>
 </html>
 
