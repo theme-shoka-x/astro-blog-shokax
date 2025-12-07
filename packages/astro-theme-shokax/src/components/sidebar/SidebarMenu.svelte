@@ -93,7 +93,7 @@
 </script>
 
 <nav class='menu'>
-  <ul class='menu-list'>
+  <ul class='menu-list list-none'>
     {#each menuItems as item (item.type === 'nav' ? item.data.href : item.key)}
       {#if item.type === 'nav'}
         {@const navItem = item.data}

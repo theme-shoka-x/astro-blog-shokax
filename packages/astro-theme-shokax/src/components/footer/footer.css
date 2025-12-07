@@ -5,6 +5,7 @@
 
 @layer components {
   #footer {
+    z-index: 100;
     color: var(--grey-5, #999);
     font-size: 0.875rem;
     background: var(--body-bg-shadow, rgba(0, 0, 0, 0.02));
