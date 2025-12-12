@@ -319,3 +319,585 @@
   align-self: flex-end;
   text-align: right;
 }
+/* ============================================
+   Markdown Content Styles - Core Elements
+   ============================================ */
+
+/* Headings */
+.md h1,
+.md h2,
+.md h3,
+.md h4,
+.md h5,
+.md h6 {
+  position: relative;
+  padding-top: 0.625rem;
+}
+
+.md h1 {
+  font-size: 1.875rem;
+}
+
+.md h2 {
+  font-size: 1.625rem;
+}
+
+.md h3 {
+  font-size: 1.375rem;
+}
+
+.md h4 {
+  font-size: 1.25rem;
+}
+
+.md h5 {
+  font-size: 1.125rem;
+}
+
+.md h6 {
+  font-size: 1rem;
+}
+
+.md h1:hover .anchor::before,
+.md h1:hover .anchor::after,
+.md h2:hover .anchor::before,
+.md h2:hover .anchor::after,
+.md h3:hover .anchor::before,
+.md h3:hover .anchor::after,
+.md h4:hover .anchor::before,
+.md h4:hover .anchor::after,
+.md h5:hover .anchor::before,
+.md h5:hover .anchor::after,
+.md h6:hover .anchor::before,
+.md h6:hover .anchor::after {
+  color: var(--primary-color);
+}
+
+.md h1::after {
+  content: '';
+  display: block;
+  box-sizing: unset;
+  width: 100%;
+  height: 0.0625rem;
+  background: var(--grey-3);
+  padding-right: 1.25rem;
+  margin-left: -1.25rem;
+  margin-top: 0.3125rem;
+}
+
+/* Anchor Links */
+.md .anchor {
+  border-bottom-style: none;
+  color: var(--grey-4);
+  float: right;
+  margin-left: 0.625rem;
+}
+
+.md .anchor:hover {
+  color: inherit;
+}
+
+.md .anchor::before,
+.md .anchor::after {
+  color: var(--grey-4);
+  position: absolute;
+  font-weight: normal;
+  transition: all 0.3s ease-out;
+}
+
+.md .active .anchor::before,
+.md .active .anchor::after {
+  color: var(--primary-color);
+}
+
+/* Paragraphs and Last Children */
+.md p {
+  margin: 0 0 0.8rem;
+}
+
+.md p:last-child,
+.md table:last-child,
+.md pre:last-child,
+.md blockquote:last-child,
+.md img:last-child,
+.md .tabs:last-child,
+.md .links:last-child {
+  margin-bottom: 0;
+}
+
+.md ul ul,
+.md ul ol,
+.md dd ul,
+.md dd ol,
+.md ol ul,
+.md ol ol {
+  margin-top: 0;
+}
+
+/* Links */
+.md a {
+  color: var(--primary-color);
+}
+
+.md a:hover {
+  color: var(--color-blue);
+}
+
+/* Blockquotes */
+.md blockquote {
+  font-size: 90%;
+  background-color: var(--grey-2);
+  margin: 1.25rem 0;
+  border-radius: 0.1875rem;
+}
+
+.md blockquote ul {
+  margin: 0.625rem 0 !important;
+}
+
+.md blockquote ul > li::before {
+  width: 0.375rem !important;
+  height: 0.375rem !important;
+  top: 0.6875rem !important;
+}
+
+.md blockquote p:last-child,
+.md blockquote ol:last-child,
+.md blockquote ul:last-child {
+  margin-bottom: 0 !important;
+}
+
+.md > blockquote {
+  border-left-color: var(--primary-color);
+}
+
+/* Iframes and Media */
+.md iframe {
+  margin-bottom: 1.25rem;
+}
+
+.md .image-info {
+  display: block;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--grey-4);
+}
+
+.md .video-container {
+  height: 0;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  padding-top: 75%;
+  position: relative;
+  width: 100%;
+}
+
+.md .video-container iframe,
+.md .video-container object,
+.md .video-container embed {
+  height: 100%;
+  left: 0;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+
+.md li {
+  position: relative;
+  margin: 0.2rem 0;
+}
+
+.md li::before {
+  transition: all 0.3s ease;
+}
+
+.md li p {
+  margin: 0;
+}
+
+.md ul,
+.md ol,
+.md dl {
+  margin: 0.5em 0;
+  padding: 0.1em 0.2em 0.1em 1.4em;
+}
+
+/* Unordered Lists */
+.md ul > li::before,
+.md dl dt::before {
+  content: '';
+  position: absolute;
+  width: 0.4em;
+  height: 0.4em;
+  background: var(--primary-color);
+  border-radius: 50%;
+  top: 0.85em;
+  left: -1em;
+}
+
+.md ul > li:hover::before,
+.md dl dt:hover::before {
+  background: var(--color-pink);
+}
+
+/* Ordered Lists */
+.md ol:not([start]) {
+  counter-reset: counter;
+}
+
+.md ol > li::before {
+  counter-increment: counter;
+  content: counter(counter);
+  position: absolute;
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 0.8em;
+  line-height: 1.4;
+  top: 0.5em;
+  left: -1.8em;
+  background: var(--primary-color);
+  color: var(--grey-1);
+  cursor: pointer;
+}
+
+.md ol > li:hover::before {
+  color: var(--grey-1);
+  background: var(--color-pink);
+}
+
+/* Definition Lists */
+.md dl dt {
+  position: relative;
+}
+
+.md dl dd {
+  padding-left: 0.9375em;
+}
+
+/* Nested Lists */
+.md li ul > li::before {
+  background: var(--grey-1);
+  border: 1px solid var(--primary-color);
+}
+
+.md li ol > li::before,
+.md dd ol > li::before {
+  content: counter(counter) '.';
+  background: none;
+  color: var(--primary-color);
+  font-size: 1em;
+  line-height: 1;
+  width: auto;
+}
+
+.md li ol > li:hover::before,
+.md dd ol > li:hover::before {
+  background: none;
+  color: var(--color-pink);
+}
+
+/* Special List Items */
+.md ul li.nodot::before {
+  content: none;
+  display: none;
+}
+
+/* Task Lists */
+.md ul li.task-list-item::before {
+  content: none;
+  display: none;
+}
+
+.md ul li.task-list-item input[type='checkbox'] {
+  display: none;
+}
+
+.md ul li.task-list-item input[type='checkbox'] + label::before {
+  content: '\e900';
+  font-family: 'iconfont';
+  color: var(--grey-4);
+  display: inline-block;
+  margin-right: 0.625em;
+}
+
+.md ul li.task-list-item input[type='checkbox']:checked + label::before {
+  content: '\e901';
+  color: var(--primary-color);
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+.table-container {
+  overflow: auto;
+}
+
+.table-container table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 0.875rem;
+  margin: 0 0 1.25rem 0;
+  width: 100%;
+  overflow: auto;
+}
+
+.table-container table tbody tr:nth-of-type(even) {
+  background: var(--grey-0);
+}
+
+.table-container table tbody tr:hover {
+  background: var(--grey-2);
+}
+
+.table-container table caption,
+.table-container table th,
+.table-container table td {
+  font-weight: normal;
+  padding: 0.5rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.table-container table th,
+.table-container table td {
+  border: 0.0625rem solid var(--grey-3);
+  border-bottom: 0.1875rem solid var(--grey-3);
+}
+
+.table-container table th {
+  font-weight: 700;
+  padding-bottom: 0.625rem;
+  text-align: center;
+}
+
+.table-container table td {
+  border-bottom-width: 0.0625rem;
+}
+
+.table-container table td p:last-child,
+.table-container table td pre:last-child,
+.table-container table td .highlight:last-child {
+  margin: 0;
+}
+
+/* ============================================
+   Special Formatting
+   ============================================ */
+
+/* Keyboard */
+.md .kbd,
+.md kbd {
+  background-color: var(--grey-1);
+  background-image: linear-gradient(var(--grey-2), var(--grey-0), var(--grey-2));
+  border: 0.0625rem solid var(--grey-4);
+  border-radius: 0.2rem;
+  box-shadow: 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+  font-family: inherit;
+  padding: 0.1rem 0.3rem;
+  white-space: nowrap;
+}
+
+/* Mark */
+.md mark {
+  background-color: #dbfdad;
+}
+
+/* Insert/Underline */
+.md ins {
+  --line-color: var(--primary-color);
+  text-decoration: none;
+  border-bottom: 0.125rem solid var(--line-color);
+}
+
+.md ins.wavy {
+  text-decoration-style: wavy;
+  text-decoration-line: underline;
+  text-decoration-color: var(--line-color);
+  border-bottom: none;
+}
+
+.md ins.dot {
+  border-bottom: 0.2rem dotted var(--line-color);
+}
+
+/* Strikethrough */
+.md s {
+  color: var(--grey-5);
+  text-decoration-color: var(--grey-5);
+}
+
+/* Ruby */
+.md ruby {
+  padding: 0 0.3125rem;
+}
+
+/* KaTeX */
+.md .katex-display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+/* Spoiler */
+.md .spoiler:not(.bulr) {
+  background-color: var(--text-color);
+  color: var(--text-color);
+  text-shadow: none;
+  transition: color 0.3s;
+  padding: 0 0.1875rem;
+}
+
+.md .spoiler:not(.bulr):hover {
+  color: #fff;
+}
+
+.md .bulr {
+  text-shadow: rgba(0, 0, 0, 0.7) 0 0 0.625rem;
+  color: transparent;
+}
+
+/* Rainbow */
+@keyframes rainbow {
+  to {
+    background-position: -2000vw;
+  }
+}
+
+.md .rainbow {
+  background-image: linear-gradient(
+    to left,
+    orangered,
+    orange,
+    gold,
+    lightgreen,
+    cyan,
+    dodgerblue,
+    mediumpurple,
+    hotpink,
+    orangered
+  );
+  background-size: 110vw;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: rainbow 60s linear infinite;
+}
+
+/* ============================================
+   Note/Details Container Styles
+   ============================================ */
+
+.md .note h2,
+.md .note h3,
+.md .note h4,
+.md .note h5,
+.md .note h6,
+.md details h2,
+.md details h3,
+.md details h4,
+.md details h5,
+.md details h6 {
+  margin-top: 0.1875rem;
+  border-bottom: initial;
+  margin-bottom: 0;
+  padding-top: 0;
+}
+
+.md .note p,
+.md details p {
+  line-height: 1.8;
+}
+
+.md .note a:not(.btn),
+.md details a:not(.btn) {
+  color: var(--note-hover);
+  border-bottom: 0.0625rem dashed var(--note-text);
+}
+
+.md .note a:not(.btn):hover,
+.md details a:not(.btn):hover {
+  color: var(--note-text);
+  border-bottom-color: var(--note-text);
+}
+
+.md .note ul li::before,
+.md details ul li::before {
+  background: var(--note-text);
+}
+
+.md .note ol li:before,
+.md details ol li:before {
+  background: var(--note-text, var(--primary-color)) !important;
+  width: 0.8rem;
+  height: 0.8rem;
+  font-size: 0.45rem;
+  line-height: 0.8rem;
+  top: 0.4rem;
+  left: -1.2rem;
+}
+
+/* Article-specific anchor styles */
+.article .md .anchor::before,
+.article .md .anchor::after {
+  content: 'H';
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  left: -1.875rem;
+  top: 1rem;
+  width: 1.25rem;
+  height: 1.5625rem;
+  text-align: right;
+  visibility: visible;
+  font-size: 80%;
+}
+
+@media screen and (max-width: 500px) {
+  .article .md .anchor::before,
+  .article .md .anchor::after {
+    left: -0.625rem;
+  }
+}
+
+.article .md .anchor::after {
+  font-size: 50%;
+  left: -1.375rem;
+  line-height: 3;
+}
+
+@media screen and (max-width: 500px) {
+  .article .md .anchor::after {
+    left: -0.1875rem;
+  }
+}
+
+.article .md h1 .anchor::after {
+  content: '1';
+}
+
+.article .md h2 .anchor::after {
+  content: '2';
+}
+
+.article .md h3 .anchor::after {
+  content: '3';
+}
+
+.article .md h4 .anchor::after {
+  content: '4';
+}
+
+.article .md h5 .anchor::after {
+  content: '5';
+}
+
+.article .md h6 .anchor::after {
+  content: '6';
+}
