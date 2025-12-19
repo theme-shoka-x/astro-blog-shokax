@@ -120,7 +120,8 @@
       }
 
       // Apply affix when scrolled past header and on desktop (width >= 1024px)
-      const shouldAffix = window.scrollY > headerHeight && window.innerWidth >= 1024
+      // 155px 能保证侧边栏过渡效果自然
+      const shouldAffix = window.scrollY > headerHeight - 155 && window.innerWidth >= 1024
       isAffix = shouldAffix
     }
 
@@ -190,7 +191,7 @@
   #sidebar {
     position: static;
     overflow: scroll;
-    width: 280px;
+    width: 100%;
     top: 0;
     bottom: 0;
     transition: all 0.3s ease;
@@ -225,6 +226,7 @@
   /* Affix styles */
   #sidebar.affix > .inner {
     position: fixed;
+    width: 240px;
     top: 0;
   }
 
@@ -236,7 +238,7 @@
   /* Sidebar inner */
   #sidebar > .inner {
     position: relative;
-    width: 280px;
+    width: 100%;
     color: var(--grey-6);
     text-align: center;
     display: flex;

@@ -26,7 +26,7 @@
         type='button'
       >
         {#if iconClass}
-          <i class={`ic ${iconClass}`}></i>
+          <div class={`${iconClass}`}></div>
         {/if}
         {#if activePanel === panel.id}
           <span>{panel.title}</span>
@@ -62,6 +62,8 @@
     background-color: rgba(0, 0, 0, 0.08);
     transition: all 0.2s ease-out;
     border: none;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
   .tab .item:nth-child(2) {

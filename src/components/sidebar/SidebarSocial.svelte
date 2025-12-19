@@ -30,7 +30,7 @@
           rel='noopener noreferrer'
           style={link.color ? `--social-color: ${link.color}` : ''}
         >
-          <i class={`ic i-${link.icon}`}></i>
+          <div class={`${link.icon} w-full h-full scale-80`}></div>
         </a>
       {/if}
     {/each}
@@ -44,7 +44,7 @@
   }
 
   .social .item {
-    display: inline-block;
+    display: inline-flex;
     width: 1.875rem;
     height: 1.875rem;
     line-height: 1.875rem;
@@ -53,9 +53,11 @@
     overflow: hidden;
     border-radius: 38%;
     text-decoration: none;
+    flex-wrap: wrap;
+    align-items: center
   }
 
-  .social .item i {
+  .social .item div {
     font-size: 1.4em;
     vertical-align: middle;
     transform: scale(0.8);
@@ -80,12 +82,12 @@
     left: -10%;
   }
 
-  .social .item i {
-    color: var(--social-color, var(--color-pink));
+  .social .item div {
+    color: var(--social-color, var(--color-grey-5));
   }
 
-  .social .item:focus i,
-  .social .item:hover i {
+  .social .item:focus div,
+  .social .item:hover div {
     color: var(--grey-0);
     transform: scale(1);
   }

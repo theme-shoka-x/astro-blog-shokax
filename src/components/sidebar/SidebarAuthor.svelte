@@ -18,6 +18,7 @@
         itemprop='image'
         loading='lazy'
         decoding='async'
+        fetchpriority='high'
       />
     {/if}
     {#if author}

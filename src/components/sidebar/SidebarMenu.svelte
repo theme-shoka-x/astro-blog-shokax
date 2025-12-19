@@ -10,23 +10,7 @@
 
   // Map old iconfont icons to remixicon equivalents
   const iconMap: Record<string, string> = {
-    home: 'home',
-    archive: 'archive-2-line',
-    tag: 'price-tag-3-line',
-    category: 'folder-2-line',
-    folder: 'folder-2-line',
-    about: 'information-line',
-    user: 'user-line',
-    contact: 'mail-line',
-    github: 'github-fill',
-    twitter: 'twitter-x-line',
-    facebook: 'facebook-circle-fill',
-    link: 'link',
-    search: 'search-line',
-    menu: 'menu-line',
-    close: 'close-line',
-    back: 'arrow-left-line',
-    next: 'arrow-right-line',
+
   }
 
   const getMenuUrl = (item: any): string => {
@@ -42,8 +26,7 @@
       return iconMap[iconName] || iconName || ''
     }
     if (item?.icon) {
-      const iconName = item.icon.startsWith('i-') ? item.icon.replace('i-', '') : item.icon
-      return iconMap[iconName] || iconName
+      return item.icon
     }
     return ''
   }
@@ -109,7 +92,7 @@
           <li class='item dropdown'>
             <a href={url} rel='section'>
               {#if icon}
-                <i class={`ic i-${icon}`}></i>
+                <div class={`ic ${icon}`}></div>
               {/if}
               {text}
             </a>
@@ -118,7 +101,7 @@
                 <li class='item'>
                   <a href={subItem.href} rel='section'>
                     {#if subItem.icon}
-                      <i class={`ic i-${getMenuIcon(subItem)}`}></i>
+                      <div class={`ic ${getMenuIcon(subItem)}`}></div>
                     {/if}
                     {subItem.text}
                   </a>
@@ -130,7 +113,7 @@
           <li class='item'>
             <a href={url} rel='section'>
               {#if icon}
-                <i class={`ic i-${icon}`}></i>
+                <div class={`ic ${icon}`}></div>
               {/if}
               {text}
             </a>
@@ -150,7 +133,7 @@
                 e.preventDefault()
             }}>
               {#if icon}
-                <i class={`ic i-${icon}`}></i>
+                <div class={`ic ${icon}`}></div>
               {/if}
               {text}
             </a>
@@ -159,7 +142,7 @@
                 <li class='item'>
                   <a href={subItem.href} rel='section'>
                     {#if subItem.icon}
-                      <i class={`ic i-${getMenuIcon(subItem)}`}></i>
+                      <div class={`ic ${getMenuIcon(subItem)}`}></div>
                     {/if}
                     {subItem.text}
                   </a>
@@ -171,7 +154,7 @@
           <li class='item'>
             <a href={url} rel='section'>
               {#if icon}
-                <i class={`ic i-${icon}`}></i>
+                <div class={`ic ${icon}`}></div>
               {/if}
               {text}
             </a>
@@ -183,6 +166,15 @@
 </nav>
 
 <style>
+  .ic {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+    flex-wrap: wrap;
+    vertical-align: text-bottom;
+  }
+
   .menu {
     padding: 1.25rem;
     margin: 0;
@@ -239,7 +231,7 @@
     display: block;
   }
 
-  .menu .item .ic {
+  .menu .item div {
     margin-right: 0.625rem;
   }
 

@@ -27,7 +27,7 @@
         href={href}
         text={text}
         icon={icon}
-        class='transition-link ml-1 mr-1 block hover:translate-x-1.5'
+        class='ml-1 mr-1 block transition-300 transition-all transition-ease-in-out hover:translate-x-1.5'
       />
     </div>
   {/each}
@@ -36,10 +36,6 @@
 <style>
   .box-shadow {
     box-shadow: 0 0.3125rem 1.25rem -0.25rem var(--grey-9-a1);
-  }
-
-  .transition-link {
-    transition: all 0.2s ease-in-out;
   }
 
   .color-btn:hover {
