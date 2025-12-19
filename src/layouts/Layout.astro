@@ -56,7 +56,6 @@ const posts = allPosts.filter((post) => !post.data.draft)
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
-
     <ClientRouter />
   </head>
   <body>
@@ -112,6 +111,11 @@ const posts = allPosts.filter((post) => !post.data.draft)
         </div>
       </main>
     </div>
+    <script>
+      import {css} from '@/assets/fonts/MiSans VF.ttf'
+
+      document.body.style.fontFamily = css.family || 'sans-serif';
+    </script>
   </body>
 </html>
 

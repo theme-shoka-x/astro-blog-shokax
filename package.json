@@ -17,9 +17,11 @@
     "@astrojs/svelte": "^7.2.3",
     "@ctrl/tinycolor": "^4.2.0",
     "astro": "^5.16.5",
+    "cn-font-split": "^7.3.0",
     "es-toolkit": "^1.43.0",
     "svelte": "^5.46.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite-plugin-font": "^5.1.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.7.1",
@@ -31,5 +33,10 @@
     "eslint": "^9.39.2",
     "turbo": "^2.6.3",
     "unocss": "^66.5.10"
-  }
+  },
+  "trustedDependencies": [
+    "cn-font-split",
+    "koffi",
+    "protobufjs"
+  ]
 }

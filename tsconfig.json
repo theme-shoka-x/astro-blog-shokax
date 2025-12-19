@@ -4,7 +4,8 @@
     "jsx": "preserve",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["vite-plugin-font/src/font"]
   },
   "include": [
     ".astro/types.d.ts",
