@@ -15,5 +15,5 @@
   MiSans 字体版权归小米公司所有，
   使用受《MiSans 字体知识产权许可协议》约束，
   协议全文见 `license/MiSans字体知识产权许可协议.pdf`。
-- 本项目使用了 [Jetbrains Mono](https://www.jetbrains.com/lp/mono/) 作为代码块默认字体，其分发许可证放置于`license`目录下的 OFL.md
+- 本项目使用了 [Jetbrains Mono](https://www.jetbrains.com/lp/mono/) 作为代码块默认字体，其分发许可证放置于`license`目录下的 OFL.txt
 - 本项目中默认的 avatar 图片为 [QuAn_](https://www.pixiv.net/users/6657532) 的作品，本项目中该图片仅用于展示，版权归原作者所有，用户需自行确认使用合规性，请在正式部署前使用版权可控的图片替换本图片
