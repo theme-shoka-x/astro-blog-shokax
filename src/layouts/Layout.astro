@@ -19,6 +19,7 @@ import '@/components/footer/footer.css'
 
 // Import CodeBlock to define custom element
 import CodeBlock from '@/components/CodeBlock.svelte'
+import Loading from '@/components/loading.astro'
 
 // Accept sidebar props from child pages
 interface PostMeta {
@@ -84,6 +85,7 @@ const siteState = {
     <div class="hidden">
       <CodeBlock client:only />
     </div>
+    <Loading></Loading>
     <div id="container">
       <HeaderCover
         client:load

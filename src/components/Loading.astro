@@ -1,0 +1,385 @@
+<div id="loading">
+    <div class="cat">
+        <div class="body"></div>
+        <div class="head">
+            <div class="face"></div>
+        </div>
+        <div class="foot">
+            <div class="tummy-end"></div>
+            <div class="bottom"></div>
+            <div class="legs left"></div>
+            <div class="legs right"></div>
+        </div>
+        <div class="paw">
+            <div class="hands left"></div>
+            <div class="hands right"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+  :root {
+    --box-bg-shadow: rgba(0, 0, 0, 0.1);
+  }
+
+  #loading {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+    background-color: var(--grey-1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.4s ease-out;
+  }
+
+  .cat {
+    position: relative;
+    display: block;
+    width: 15em;
+    height: 15em;
+    font-size: 10px;
+    margin: auto;
+    animation: 2.74s linear infinite loading-cat;
+  }
+
+  .cat * {
+    box-sizing: content-box;
+  }
+
+  .cat .head,
+  .cat .foot,
+  .cat .body,
+  .cat .paw {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    border-radius: 50%;
+    width: 15em;
+    height: 15em;
+  }
+
+  .cat .body {
+    background-image: radial-gradient(
+      transparent 0%,
+      transparent 35%,
+      rgb(56, 60, 75) 35%,
+      rgb(56, 60, 75) 39%,
+      rgb(237, 166, 93) 39%,
+      rgb(237, 166, 93) 46%,
+      rgb(242, 192, 137) 46%,
+      rgb(242, 192, 137) 60%,
+      rgb(237, 166, 93) 60%,
+      rgb(237, 166, 93) 67%,
+      rgb(56, 60, 75) 67%,
+      rgb(56, 60, 75) 100%
+    );
+    animation: 2.74s linear infinite body;
+  }
+
+  .cat .head::before,
+  .cat .foot::before {
+    background-image: radial-gradient(
+      transparent 0%,
+      transparent 35%,
+      rgb(56, 60, 75) 35%,
+      rgb(56, 60, 75) 39%,
+      rgb(237, 166, 93) 39%,
+      rgb(237, 166, 93) 67%,
+      rgb(56, 60, 75) 67%,
+      rgb(56, 60, 75) 100%
+    );
+  }
+
+  .cat .head::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+    clip-path: polygon(100% 20%, 50% 50%, 70% -10%);
+    -webkit-clip-path: polygon(100% 20%, 50% 50%, 70% -10%);
+  }
+
+  .cat .head::after {
+    content: '';
+    width: 4.125em;
+    height: 2.5em;
+    position: absolute;
+    top: 0.8125em;
+    right: 3.9375em;
+    background-image: linear-gradient(var(--grey-1) 65%, transparent 65%),
+      radial-gradient(var(--grey-1) 51%, rgb(56, 60, 75) 55%, rgb(56, 60, 75) 68%, transparent 70%);
+    transform: rotate(-66deg);
+  }
+
+  .cat .head .face {
+    width: 5em;
+    height: 3.75em;
+    left: 9.0625em;
+    top: 1.8125em;
+    position: absolute;
+    transform: rotate(-47deg);
+    background: radial-gradient(circle, rgb(242, 192, 137) 0%, rgb(242, 192, 137) 23%, transparent 23%) -0.1875em 1.0625em no-repeat,
+      radial-gradient(circle, rgb(56, 60, 75) 0%, rgb(56, 60, 75) 6%, transparent 6%) 0.75em -0.75em no-repeat,
+      radial-gradient(circle, rgb(56, 60, 75) 0%, rgb(56, 60, 75) 6%, transparent 6%) -0.75em -0.75em no-repeat,
+      radial-gradient(rgb(237, 166, 93) 0%, rgb(237, 166, 93) 15%, transparent 15%) 0 -0.6875em no-repeat,
+      radial-gradient(circle, transparent 5%, rgb(56, 60, 75) 5%, rgb(56, 60, 75) 10%, transparent 10%) -0.1875em -0.3125em no-repeat,
+      radial-gradient(circle, transparent 5%, rgb(56, 60, 75) 5%, rgb(56, 60, 75) 10%, transparent 10%) 0.1875em -0.3125em no-repeat,
+      radial-gradient(circle, rgb(237, 166, 93) 45%, transparent 45%) 0 -0.1875em,
+      linear-gradient(
+        transparent 35%,
+        rgb(56, 60, 75) 35%,
+        rgb(56, 60, 75) 41%,
+        transparent 41%,
+        transparent 44%,
+        rgb(56, 60, 75) 44%,
+        rgb(56, 60, 75) 50%,
+        transparent 50%,
+        transparent 53%,
+        rgb(56, 60, 75) 53%,
+        rgb(56, 60, 75) 59%,
+        transparent 59%
+      );
+  }
+
+  .cat .foot::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+    clip-path: polygon(50% 50%, 0% 50%, 0% 25%);
+    -webkit-clip-path: polygon(50% 50%, 0% 50%, 0% 25%);
+  }
+
+  .cat .foot::after {
+    content: '';
+    width: 0.9em;
+    height: 2.5em;
+    position: absolute;
+    top: 2.625em;
+    left: 2.5em;
+    z-index: -1;
+    transform: rotate(25deg);
+    background-color: rgb(198, 130, 59);
+    border: 0.375em solid rgb(56, 60, 75);
+    border-bottom: 0;
+    border-radius: 0.75em 0.75em 0 0;
+  }
+
+  .cat .tummy-end {
+    width: 1.5em;
+    height: 1.5em;
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgb(242, 192, 137);
+    left: 1.1875em;
+    top: 6.5625em;
+  }
+
+  .cat .bottom {
+    width: 2.1875em;
+    height: 0.9375em;
+    position: absolute;
+    top: 4.875em;
+    left: 0.75em;
+    border: 0.375em solid rgb(56, 60, 75);
+    border-bottom: 0;
+    border-radius: 50%;
+    transform: rotate(21deg);
+    background: rgb(237, 166, 93);
+  }
+
+  .cat .hands,
+  .cat .legs {
+    width: 0.625em;
+    height: 1.5625em;
+    position: absolute;
+    border: 0.375em solid rgb(56, 60, 75);
+    background-color: rgb(237, 166, 93);
+  }
+
+  .cat .hands {
+    border-top: 0;
+    border-radius: 0 0 0.75em 0.75em;
+  }
+
+  .cat .hands.left {
+    top: 4.3em;
+    left: 13.1875em;
+    transform: rotate(-20deg);
+  }
+
+  .cat .hands.right {
+    top: 5.125em;
+    left: 10.975em;
+    transform: rotate(-25deg);
+  }
+
+  .cat .legs {
+    border-bottom: 0;
+    border-radius: 0.75em 0.75em 0 0;
+  }
+
+  .cat .legs.left {
+    top: 4.0625em;
+    left: 3.125em;
+    transform: rotate(25deg);
+  }
+
+  .cat .legs.right {
+    top: 3.3125em;
+    left: 0.75em;
+    transform: rotate(22deg);
+  }
+
+  .cat .body {
+    animation: 2.74s linear infinite body;
+  }
+
+  .cat .foot {
+    animation: 2.74s linear infinite foot;
+  }
+
+  .cat:hover {
+    animation-play-state: paused;
+  }
+
+  .cat:hover .body,
+  .cat:hover .foot {
+    animation-play-state: paused;
+  }
+
+  .cat:active {
+    animation-play-state: running;
+  }
+
+  .cat:active .body,
+  .cat:active .foot {
+    animation-play-state: running;
+  }
+
+  @keyframes body {
+    0% {
+      clip-path: polygon(50% 50%, 0% 50%, 0% 100%, 100% 100%, 100% 20%);
+    }
+    10% {
+      clip-path: polygon(50% 50%, 30% 120%, 50% 100%, 100% 100%, 100% 20%);
+    }
+    20% {
+      clip-path: polygon(50% 50%, 100% 90%, 120% 90%, 100% 100%, 100% 20%);
+    }
+    40% {
+      clip-path: polygon(50% 50%, 100% 45%, 120% 45%, 120% 50%, 100% 20%);
+    }
+    50% {
+      clip-path: polygon(50% 50%, 100% 45%, 120% 45%, 120% 50%, 100% 20%);
+    }
+    65% {
+      clip-path: polygon(50% 50%, 100% 65%, 120% 65%, 120% 50%, 100% 20%);
+    }
+    80% {
+      clip-path: polygon(50% 50%, 75% 130%, 120% 65%, 120% 50%, 100% 20%);
+    }
+    90% {
+      clip-path: polygon(50% 50%, -20% 110%, 50% 120%, 100% 100%, 100% 20%);
+    }
+    100% {
+      clip-path: polygon(50% 50%, 0% 50%, 0% 100%, 100% 100%, 100% 20%);
+    }
+  }
+
+  @keyframes loading-cat {
+    0% {
+      transform: rotate(0deg);
+    }
+    10% {
+      transform: rotate(-80deg);
+    }
+    20% {
+      transform: rotate(-180deg);
+    }
+    40% {
+      transform: rotate(-245deg);
+    }
+    50% {
+      transform: rotate(-250deg);
+    }
+    68% {
+      transform: rotate(-300deg);
+    }
+    90% {
+      transform: rotate(-560deg);
+    }
+    100% {
+      transform: rotate(-720deg);
+    }
+  }
+
+  @keyframes foot {
+    0% {
+      transform: rotate(-10deg);
+    }
+    10% {
+      transform: rotate(-100deg);
+    }
+    20% {
+      transform: rotate(-145deg);
+    }
+    35% {
+      transform: rotate(-190deg);
+    }
+    50% {
+      transform: rotate(-195deg);
+    }
+    70% {
+      transform: rotate(-165deg);
+    }
+    100% {
+      transform: rotate(-10deg);
+    }
+  }
+
+  #loading.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  const MINIMUM_LOADING_TIME = 200; // 最少显示时间（毫秒）
+  const loadingStartTime = Date.now();
+
+  function hideLoading() {
+    const loadingElement = document.getElementById('loading');
+    if (loadingElement && !loadingElement.classList.contains('hidden')) {
+      const elapsedTime = Date.now() - loadingStartTime;
+      const remainingTime = Math.max(0, MINIMUM_LOADING_TIME - elapsedTime);
+      
+      if (remainingTime > 0) {
+        setTimeout(() => {
+          loadingElement.classList.add('hidden');
+        }, remainingTime);
+      } else {
+        loadingElement.classList.add('hidden');
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideLoading);
+  } else {
+    hideLoading();
+  }
+
+  // 备用：确保window.onload时也隐藏
+  window.addEventListener('load', hideLoading);
+</script>
