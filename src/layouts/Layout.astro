@@ -17,6 +17,9 @@ import '@/styles/style.css'
 import '@/styles/header-cover.css'
 import '@/components/footer/footer.css'
 
+// Import CodeBlock to define custom element
+import CodeBlock from '@/components/CodeBlock.svelte'
+
 // Accept sidebar props from child pages
 interface PostMeta {
   date: Date
@@ -78,6 +81,9 @@ const siteState = {
     <title>{pageTitle}</title>
   </head>
   <body>
+    <div class="hidden">
+      <CodeBlock client:load />
+    </div>
     <div id="container">
       <HeaderCover
         client:load
@@ -135,6 +141,17 @@ const siteState = {
       import { css } from '@/assets/fonts/MiSans-VF.ttf?subsets'
 
       document.body.style.fontFamily = css.family as string;
+    </script>
+    <script>
+      import { initializeCodeBlock } from '@/toolkit/initCodeBlock'
+
+      document.addEventListener('astro:after-swap',()=>{
+        initializeCodeBlock('.astro-code')
+      })
+      
+      document.addEventListener('DOMContentLoaded', () => {
+        initializeCodeBlock('.astro-code')
+      })
     </script>
   </body>
 </html>

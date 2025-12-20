@@ -35,6 +35,9 @@ if (themeConfig.sidebar?.menu) {
   })
 }
 
+// iconSafeList.push('i-ri-file-copy-fill')
+// iconSafeList.push('i-ri-check-fill')
+
 export default defineConfig({
   presets: [
     presetWind4(),

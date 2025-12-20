@@ -10,10 +10,21 @@ import Font from 'vite-plugin-font'
 // https://astro.build/config
 export default defineConfig({
   site: 'https://preview.astro.kaitaku.xyz',
+  // trailingSlash: 'always',
+
   prefetch: true,
-  integrations: [UnoCSS({
-    injectReset: true,
-  }), svelte()],
+
+  integrations: [
+    UnoCSS({
+      injectReset: true,
+    }),
+    svelte({
+      compilerOptions: {
+        customElement: true
+      }
+    })
+  ],
+  
   vite: {
     resolve: {
       alias: {
@@ -27,4 +38,9 @@ export default defineConfig({
       esToolkitPlugin(),
     ]
   },
+  markdown: {
+    shikiConfig: {
+      theme: 'vitesse-light'
+    }
+  }
 })

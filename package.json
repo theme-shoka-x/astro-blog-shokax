@@ -19,10 +19,12 @@
     "astro": "^5.16.6",
     "cn-font-split": "^7.4.1",
     "es-toolkit": "^1.43.0",
+    "rehype-raw": "^7.0.0",
     "svelte": "^5.46.0",
     "typescript": "^5.9.3",
-    "vite-plugin-font": "^5.1.2",
-    "vite-plugin-es-toolkit": "^1.1.0"
+    "unist-util-visit": "^5.0.0",
+    "vite-plugin-es-toolkit": "^1.1.0",
+    "vite-plugin-font": "^5.1.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.7.1",
