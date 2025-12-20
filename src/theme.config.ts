@@ -7,34 +7,29 @@ export default defineConfig({
   nav: [
     {
       href: '/',
-      text: 'Home',
+      text: '首页',
       icon: 'i-ri-home-line',
     },
     {
-      href: '/about',
-      text: 'About',
-      icon: 'i-ri-user-6-line',
-    },
-    {
-      href: '/contact',
-      text: 'Contact',
-      icon: 'i-ri-mail-line',
-    },
-    {
       dropbox: true,
-      text: 'Account',
-      href: '/account',
-      icon: 'i-ri-account-circle-line',
+      text: '文章',
+      href: '/posts',
+      icon: 'i-ri-quill-pen-fill',
       dropboxItems: [
         {
-          href: '/login',
-          text: 'Login',
-          icon: 'i-ri-login-circle-line',
+          href: '/categories',
+          text: '分类',
+          icon: 'i-ri-book-shelf-fill',
         },
         {
-          href: '/register',
-          text: 'Register',
-          icon: 'i-ri-survey-line',
+          href: '/tags',
+          text: '标签',
+          icon: 'i-ri-price-tag-3-fill',
+        },
+        {
+          href: '/archives',
+          text: '归档',
+          icon: 'i-ri-archive-line',
         },
       ],
     },
@@ -98,4 +93,10 @@ export default defineConfig({
     randomPosts: true,
     recentComments: true,
   },
+  home: {
+    selectedCategories: [
+      {name: 'Tutorial'},
+      {name: 'Frontend'}
+    ]
+  }
 })
