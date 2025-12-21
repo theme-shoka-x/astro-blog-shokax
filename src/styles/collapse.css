@@ -16,7 +16,7 @@
 }
 
 .timeline .item::before {
-  content: '';
+  content: "";
   position: absolute;
   z-index: 1;
   transition: all 0.4s ease-in-out;
@@ -31,7 +31,7 @@
 }
 
 .timeline .item:not(:last-child):not(.title)::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 1.9rem;
   bottom: -1.9rem;

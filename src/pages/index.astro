@@ -46,10 +46,10 @@ publishedPosts.forEach((post) => {
 
 // Transform categories for CategoryCards component
 const categories = Array.from(categoryMap.entries())
-  .filter(([name, _]) => themeConfig.home?.selectedCategories?.some(cat => cat.name === name))
+  .filter(([name, _]) => themeConfig.home?.selectedCategories?.some((cat) => cat.name === name))
   .map(([name, data]) => ({
     name,
-    cover: themeConfig.home?.selectedCategories?.find(cat => cat.name === name)?.cover,
+    cover: themeConfig.home?.selectedCategories?.find((cat) => cat.name === name)?.cover,
     url: `/categories/${name}`,
     postCount: data.posts.length,
     posts: data.posts.slice(0, 6).map((p) => ({
@@ -58,12 +58,14 @@ const categories = Array.from(categoryMap.entries())
     })),
   }))
   .sort((a, b) => b.postCount - a.postCount)
-
 ---
 
-<Layout pageTitle=`${themeConfig.brand?.logo || ''} = ${themeConfig.brand?.title || ''} = ${themeConfig.brand?.subtitle || ''}` indexPage={true}>
+<Layout
+  pageTitle=`${themeConfig.brand?.logo || ''} = ${themeConfig.brand?.title || ''} = ${themeConfig.brand?.subtitle || ''}`
+  indexPage={true}
+>
   <Fragment slot="head">
-    <meta name="description" content={themeConfig.sidebar?.description}>
+    <meta name="description" content={themeConfig.sidebar?.description} />
   </Fragment>
 
   <IndexContent posts={regularPosts} stickyPosts={stickyPosts} categories={categories} isFirstPage={true} />

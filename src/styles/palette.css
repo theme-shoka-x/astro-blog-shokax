@@ -84,7 +84,7 @@
   --note-hover: #f14668;
 }
 
-:root[data-theme='dark'] {
+:root[data-theme="dark"] {
   --grey-0: #222;
   --grey-1: #21252b;
   --grey-2: #363636;

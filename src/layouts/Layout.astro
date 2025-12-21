@@ -38,7 +38,15 @@ interface Props {
   indexPage?: boolean
 }
 
-const { toc = [], relatedPosts = [], currentSlug = '', navigation = {}, pageTitle = '', postMeta, indexPage = false } = Astro.props
+const {
+  toc = [],
+  relatedPosts = [],
+  currentSlug = '',
+  navigation = {},
+  pageTitle = '',
+  postMeta,
+  indexPage = false,
+} = Astro.props
 
 const navLinks = themeConfig.nav
 const siteName = themeConfig.siteName
@@ -76,8 +84,8 @@ const siteState = {
 
     <slot name="head" />
 
-    <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
 
     <title>{pageTitle}</title>
   </head>
@@ -85,7 +93,7 @@ const siteState = {
     <div class="hidden">
       <CodeBlock client:only />
     </div>
-    <Loading transition:persist></Loading>
+    <Loading transition:persist />
     <div id="container">
       <HeaderCover
         client:load
@@ -102,7 +110,7 @@ const siteState = {
         title={brandConfig.title}
         subtitle={brandConfig.subtitle}
         logo={brandConfig.logo}
-        pageTitle={indexPage ?  '' : pageTitle}
+        pageTitle={indexPage ? '' : pageTitle}
         postMeta={postMeta}
       />
       <Waves client:load />
@@ -140,21 +148,22 @@ const siteState = {
       </main>
     </div>
     <script>
-      import { css } from '@/assets/fonts/LXGWWenKai-Regular.ttf?subsets';
-      document.addEventListener('astro:after-swap',()=>{
-        document.body.style.fontFamily = css.family as string;
+      import { css } from '@/assets/fonts/LXGWWenKai-Regular.ttf?subsets'
+
+      document.addEventListener('astro:after-swap', () => {
+        document.body.style.fontFamily = css.family as string
       })
       document.addEventListener('DOMContentLoaded', () => {
-        document.body.style.fontFamily = css.family as string;
+        document.body.style.fontFamily = css.family as string
       })
     </script>
     <script>
       import { initializeCodeBlock } from '@/toolkit/initCodeBlock'
 
-      document.addEventListener('astro:after-swap',()=>{
+      document.addEventListener('astro:after-swap', () => {
         initializeCodeBlock('.astro-code')
       })
-      
+
       document.addEventListener('DOMContentLoaded', () => {
         initializeCodeBlock('.astro-code')
       })

@@ -101,7 +101,7 @@ const navigation: QuickNavigation = {
 }
 
 // Calculate word count from content
-const plainText = (post.body || '').replace(/[#*`_\[\]()]/g, '').replace(/\s+/g, ' ')
+const plainText = (post.body || '').replace(/[#*`_[\]()]/g, '').replace(/\s+/g, ' ')
 const wordCount = plainText.length
 
 // Calculate read time (assume 300 words per minute)

@@ -24,42 +24,42 @@
 <nav class='menu'>
   <ul class='menu-list list-none'>
     {#each menuItems as item (item.data.href)}
-        {@const icon = item.data.icon}
-        {@const text = item.data.text}
-        {@const url = item.data.href}
-        {@const dropboxItems = item.data.dropboxItems || []}
+      {@const icon = item.data.icon}
+      {@const text = item.data.text}
+      {@const url = item.data.href}
+      {@const dropboxItems = item.data.dropboxItems || []}
 
-        {#if item.isDropdown && dropboxItems.length > 0}
-          <li class='item dropdown'>
-            <a href={url} rel='section'>
-              {#if icon}
-                <div class={`ic ${icon}`}></div>
-              {/if}
-              {text}
-            </a>
-            <ul class='submenu'>
-              {#each dropboxItems as subItem (subItem.href)}
-                <li class='item'>
-                  <a href={subItem.href} rel='section'>
-                    {#if subItem.icon}
-                      <div class={`ic ${getMenuIcon(subItem)}`}></div>
-                    {/if}
-                    {subItem.text}
-                  </a>
-                </li>
-              {/each}
-            </ul>
-          </li>
-        {:else}
-          <li class='item'>
-            <a href={url} rel='section'>
-              {#if icon}
-                <div class={`ic ${icon}`}></div>
-              {/if}
-              {text}
-            </a>
-          </li>
-        {/if}
+      {#if item.isDropdown && dropboxItems.length > 0}
+        <li class='item dropdown'>
+          <a href={url} rel='section'>
+            {#if icon}
+              <div class={`ic ${icon}`}></div>
+            {/if}
+            {text}
+          </a>
+          <ul class='submenu'>
+            {#each dropboxItems as subItem (subItem.href)}
+              <li class='item'>
+                <a href={subItem.href} rel='section'>
+                  {#if subItem.icon}
+                    <div class={`ic ${getMenuIcon(subItem)}`}></div>
+                  {/if}
+                  {subItem.text}
+                </a>
+              </li>
+            {/each}
+          </ul>
+        </li>
+      {:else}
+        <li class='item'>
+          <a href={url} rel='section'>
+            {#if icon}
+              <div class={`ic ${icon}`}></div>
+            {/if}
+            {text}
+          </a>
+        </li>
+      {/if}
     {/each}
   </ul>
 </nav>

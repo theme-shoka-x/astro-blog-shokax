@@ -26,7 +26,7 @@
 
   const { categories = [] }: Props = $props()
 
-  let container: HTMLDivElement
+  let container: HTMLDivElement | null = null
   let items: HTMLElement[] = []
   let activeIndex = $state<number | null>(null)
 

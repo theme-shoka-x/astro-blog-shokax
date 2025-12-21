@@ -10,8 +10,7 @@
     "lint": {
       "outputs": ["src/**"]
     },
-    "test": {
-    },
+    "test": {},
     "dev": {
       "persistent": true,
       "cache": false

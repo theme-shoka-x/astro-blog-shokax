@@ -106,7 +106,13 @@ function formatDate(date: Date): string {
 
                   <div class="title">
                     {post.data.link ? (
-                      <a href={post.data.link} class="external" itemprop="url" target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={post.data.link}
+                        class="external"
+                        itemprop="url"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <span itemprop="name">{post.data.title || post.data.link}</span>
                         <i class="i-ri-external-link-line" />
                       </a>

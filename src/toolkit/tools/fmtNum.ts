@@ -7,7 +7,7 @@
  */
 export function fmtNum(num: number) {
   if (num < 0) {
-    throw new Error('Number must be non-negative')
+    throw new Error("Number must be non-negative");
   }
-  return num < 10 ? `0${num}` : String(num)
+  return num < 10 ? `0${num}` : String(num);
 }

@@ -20,7 +20,7 @@
 
   const { posts = [] }: Props = $props()
 
-  let container: HTMLDivElement
+  let container: HTMLDivElement | null = null
   let items: HTMLElement[] = []
 
   onMount(() => {

@@ -7,11 +7,6 @@
     },
     "types": ["vite-plugin-font/src/font", "@types/bun"]
   },
-  "include": [
-    ".astro/types.d.ts",
-    "**/*"
-  ],
-  "exclude": [
-    "dist"
-  ]
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
 }

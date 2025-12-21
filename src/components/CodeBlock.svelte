@@ -1,92 +1,96 @@
-<script lang="ts">
-  import { onMount } from 'svelte';
-  import {css} from '../assets/fonts/MapleMono-CN-Regular.ttf?subsets';
-  import unoStyle from 'unocss-inline/style';
+<script lang='ts'>
+  import { onMount } from 'svelte'
+  import unoStyle from 'unocss-inline/style'
+  import { css } from '../assets/fonts/MapleMono-CN-Regular.ttf?subsets'
 
-  let container = $state<HTMLElement | null>(null);
-  let copied = $state(false);
-  let codeLanguage = $state('');
-  let isDark = $state(false);
+  let container = $state<HTMLElement | null>(null)
+  let copied = $state(false)
+  let codeLanguage = $state('')
+  let isDark = $state(false)
 
   // 复制逻辑
   async function copyCode() {
     // 获取 slot 元素，然后查询其分配的内容
-    const slot = container?.querySelector('slot') as HTMLSlotElement;
-    const assignedElements = slot?.assignedElements({ flatten: true }) ?? [];
-    const preElement = assignedElements.find((el) => el.tagName === 'PRE') as HTMLPreElement | undefined;
-    
-    if (!preElement) return;
+    const slot = container?.querySelector('slot') as HTMLSlotElement
+    const assignedElements = slot?.assignedElements({ flatten: true }) ?? []
+    const preElement = assignedElements.find(el => el.tagName === 'PRE') as HTMLPreElement | undefined
+
+    if (!preElement)
+      return
 
     // 获取纯文本内容
-    const code = preElement.textContent ?? '';
+    const code = preElement.textContent ?? ''
 
     try {
-      await navigator.clipboard.writeText(code);
-      copied = true;
+      await navigator.clipboard.writeText(code)
+      copied = true
       setTimeout(() => {
-        copied = false;
-      }, 3000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
+        copied = false
+      }, 3000)
+    }
+    catch (err) {
+      console.error('Failed to copy:', err)
     }
   }
 
   // 获取语言逻辑
   function getCodeLanguage() {
     // 获取 slot 分配的元素
-    const slot = container?.querySelector('slot') as HTMLSlotElement;
-    const assignedElements = slot?.assignedElements({ flatten: true }) ?? [];
-    const preElement = assignedElements.find((el) => el.tagName === 'PRE') as HTMLPreElement | undefined;
-    if (!preElement) return '';
+    const slot = container?.querySelector('slot') as HTMLSlotElement
+    const assignedElements = slot?.assignedElements({ flatten: true }) ?? []
+    const preElement = assignedElements.find(el => el.tagName === 'PRE') as HTMLPreElement | undefined
+    if (!preElement)
+      return ''
 
     // 从 PRE 元素的 data-language 属性获取语言
-    const language = preElement.getAttribute('data-language');
-    return language ?? '';
+    const language = preElement.getAttribute('data-language')
+    return language ?? ''
   }
 
   onMount(() => {
     // 检查系统/文档主题
-    isDark = document.documentElement.getAttribute('data-theme') === 'dark' 
-             || document.documentElement.classList.contains('dark');
-    
+    isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+      || document.documentElement.classList.contains('dark')
+
     // 从插入的 DOM 中分析语言
-    codeLanguage = getCodeLanguage();
-    
-    const shadowRoot = container?.getRootNode() as ShadowRoot | Document;
+    codeLanguage = getCodeLanguage()
+
+    const shadowRoot = container?.getRootNode() as ShadowRoot | Document
     if (shadowRoot instanceof ShadowRoot) {
-      shadowRoot.appendChild(unoStyle.cloneNode(true));
-    } else {
-      container?.appendChild(unoStyle);
+      shadowRoot.appendChild(unoStyle.cloneNode(true))
     }
-  });
-  
+    else {
+      container?.appendChild(unoStyle)
+    }
+  })
+
 </script>
 
 <div class="codeblock {isDark ? 'dark' : ''}">
-  <div class="header">
-    <div class="controls">
-      <div class="dot red"></div>
-      <div class="dot yellow"></div>
-      <div class="dot green"></div>
+  <div class='header'>
+    <div class='controls'>
+      <div class='dot red'></div>
+      <div class='dot yellow'></div>
+      <div class='dot green'></div>
       {#if codeLanguage}
-        <span class="lang-text">{codeLanguage}</span>
+        <span class='lang-text'>{codeLanguage}</span>
       {/if}
     </div>
-    <div class="actions">
+    <div class='actions'>
       <button
         class="copy-btn {copied ? 'i-ri-check-fill' : 'i-ri-file-copy-fill'}"
         onclick={copyCode}
-        aria-label="Copy code"
+        aria-label='Copy code'
       ></button>
     </div>
   </div>
 
-  <div bind:this={container} class="content-wrapper" style="font-family: { css.family };">
+  <div bind:this={container} class='content-wrapper' style='font-family: {css.family};'>
     <slot />
   </div>
 </div>
 
-<svelte:options customElement="code-block" />
+<svelte:options customElement='code-block' />
 
 <style>
   /* 基础布局 */

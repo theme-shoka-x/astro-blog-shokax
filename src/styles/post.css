@@ -93,8 +93,8 @@
   text-align: center;
   border-top: 0.0625rem dashed var(--grey-9-a1);
   font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 /* Post Meta */
@@ -140,7 +140,7 @@
 }
 
 .post .tags a:before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   height: 100%;
@@ -162,7 +162,7 @@
 
 /* Post Footer */
 .post footer::before {
-  content: '';
+  content: "";
   width: 100%;
   height: 0.0625rem;
   background: var(--grey-3);
@@ -181,7 +181,7 @@
 }
 
 #copyright li::before {
-  font-family: 'iconfont';
+  font-family: "iconfont";
   color: var(--grey-5);
   margin-right: 0.3125rem;
   font-size: 1.1rem;
@@ -190,15 +190,15 @@
 }
 
 #copyright .author::before {
-  content: '\e900';
+  content: "\e900";
 }
 
 #copyright .link::before {
-  content: '\e901';
+  content: "\e901";
 }
 
 #copyright .license::before {
-  content: '\e902';
+  content: "\e902";
 }
 
 /* Reward */
@@ -286,7 +286,7 @@
 }
 
 .post-nav .item a::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
@@ -371,7 +371,7 @@
 }
 
 .md h1::after {
-  content: '';
+  content: "";
   display: block;
   box-sizing: unset;
   width: 100%;
@@ -527,7 +527,7 @@
 /* Unordered Lists */
 .md ul > li::before,
 .md dl dt::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 0.4em;
   height: 0.4em;
@@ -586,7 +586,7 @@
 
 .md li ol > li::before,
 .md dd ol > li::before {
-  content: counter(counter) '.';
+  content: counter(counter) ".";
   background: none;
   color: var(--primary-color);
   font-size: 1em;
@@ -612,20 +612,20 @@
   display: none;
 }
 
-.md ul li.task-list-item input[type='checkbox'] {
+.md ul li.task-list-item input[type="checkbox"] {
   display: none;
 }
 
-.md ul li.task-list-item input[type='checkbox'] + label::before {
-  content: '\e900';
-  font-family: 'iconfont';
+.md ul li.task-list-item input[type="checkbox"] + label::before {
+  content: "\e900";
+  font-family: "iconfont";
   color: var(--grey-4);
   display: inline-block;
   margin-right: 0.625em;
 }
 
-.md ul li.task-list-item input[type='checkbox']:checked + label::before {
-  content: '\e901';
+.md ul li.task-list-item input[type="checkbox"]:checked + label::before {
+  content: "\e901";
   color: var(--primary-color);
 }
 
@@ -843,10 +843,10 @@
 /* Article-specific anchor styles */
 .article .md .anchor::before,
 .article .md .anchor::after {
-  content: 'H';
+  content: "H";
   font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   left: -1.875rem;
   top: 1rem;
   width: 1.25rem;
@@ -876,25 +876,25 @@
 }
 
 .article .md h1 .anchor::after {
-  content: '1';
+  content: "1";
 }
 
 .article .md h2 .anchor::after {
-  content: '2';
+  content: "2";
 }
 
 .article .md h3 .anchor::after {
-  content: '3';
+  content: "3";
 }
 
 .article .md h4 .anchor::after {
-  content: '4';
+  content: "4";
 }
 
 .article .md h5 .anchor::after {
-  content: '5';
+  content: "5";
 }
 
 .article .md h6 .anchor::after {
-  content: '6';
+  content: "6";
 }

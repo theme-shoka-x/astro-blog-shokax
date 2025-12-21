@@ -1,13 +1,15 @@
-import type { Post } from './types'
+import type { Post } from "./types";
 
-type PostWithDay = Post
+type PostWithDay = Post;
 
 export interface ArchiveConfig {
-  daily?: boolean
+  daily?: boolean;
 }
 
 export interface StructuredPosts {
-  [year: number]: Array<PostWithDay[]> & { [month: number]: PostWithDay[] & { day?: Record<number, PostWithDay[]> } }
+  [year: number]: Array<PostWithDay[]> & {
+    [month: number]: PostWithDay[] & { day?: Record<number, PostWithDay[]> };
+  };
 }
 
 /**
@@ -18,33 +20,33 @@ export interface StructuredPosts {
  * @returns 结构化的文章列表
  */
 export function structurePostsByDate(posts: Post[], config: ArchiveConfig = {}): StructuredPosts {
-  const grouped: StructuredPosts = {}
+  const grouped: StructuredPosts = {};
 
   posts.forEach((post) => {
-    const date = post.data.date
-    const year = date.getFullYear()
-    const month = date.getMonth() + 1 // month starts from 0
-    const day = date.getDate()
+    const date = post.data.date;
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // month starts from 0
+    const day = date.getDate();
 
     if (!grouped[year]) {
-      grouped[year] = Array.from({ length: 13 }, () => []) as any
+      grouped[year] = Array.from({ length: 13 }, () => []) as any;
     }
 
-    grouped[year][0].push(post)
-    grouped[year][month].push(post)
+    grouped[year][0].push(post);
+    grouped[year][month].push(post);
 
     if (config.daily) {
       if (!grouped[year][month].day) {
-        grouped[year][month].day = {}
+        grouped[year][month].day = {};
       }
 
       if (!grouped[year][month].day![day]) {
-        grouped[year][month].day![day] = []
+        grouped[year][month].day![day] = [];
       }
 
-      grouped[year][month].day![day].push(post)
+      grouped[year][month].day![day].push(post);
     }
-  })
+  });
 
-  return grouped
+  return grouped;
 }

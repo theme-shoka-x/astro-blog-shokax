@@ -1,20 +1,20 @@
 <div id="loading">
-    <div class="cat">
-        <div class="body"></div>
-        <div class="head">
-            <div class="face"></div>
-        </div>
-        <div class="foot">
-            <div class="tummy-end"></div>
-            <div class="bottom"></div>
-            <div class="legs left"></div>
-            <div class="legs right"></div>
-        </div>
-        <div class="paw">
-            <div class="hands left"></div>
-            <div class="hands right"></div>
-        </div>
+  <div class="cat">
+    <div class="body"></div>
+    <div class="head">
+      <div class="face"></div>
     </div>
+    <div class="foot">
+      <div class="tummy-end"></div>
+      <div class="bottom"></div>
+      <div class="legs left"></div>
+      <div class="legs right"></div>
+    </div>
+    <div class="paw">
+      <div class="hands left"></div>
+      <div class="hands right"></div>
+    </div>
+  </div>
 </div>
 
 <style>
@@ -115,7 +115,8 @@
     position: absolute;
     top: 0.8125em;
     right: 3.9375em;
-    background-image: linear-gradient(var(--grey-1) 65%, transparent 65%),
+    background-image:
+      linear-gradient(var(--grey-1) 65%, transparent 65%),
       radial-gradient(var(--grey-1) 51%, rgb(56, 60, 75) 55%, rgb(56, 60, 75) 68%, transparent 70%);
     transform: rotate(-66deg);
   }
@@ -127,12 +128,22 @@
     top: 1.8125em;
     position: absolute;
     transform: rotate(-47deg);
-    background: radial-gradient(circle, rgb(242, 192, 137) 0%, rgb(242, 192, 137) 23%, transparent 23%) -0.1875em 1.0625em no-repeat,
+    background:
+      radial-gradient(circle, rgb(242, 192, 137) 0%, rgb(242, 192, 137) 23%, transparent 23%) -0.1875em 1.0625em
+        no-repeat,
       radial-gradient(circle, rgb(56, 60, 75) 0%, rgb(56, 60, 75) 6%, transparent 6%) 0.75em -0.75em no-repeat,
       radial-gradient(circle, rgb(56, 60, 75) 0%, rgb(56, 60, 75) 6%, transparent 6%) -0.75em -0.75em no-repeat,
       radial-gradient(rgb(237, 166, 93) 0%, rgb(237, 166, 93) 15%, transparent 15%) 0 -0.6875em no-repeat,
-      radial-gradient(circle, transparent 5%, rgb(56, 60, 75) 5%, rgb(56, 60, 75) 10%, transparent 10%) -0.1875em -0.3125em no-repeat,
-      radial-gradient(circle, transparent 5%, rgb(56, 60, 75) 5%, rgb(56, 60, 75) 10%, transparent 10%) 0.1875em -0.3125em no-repeat,
+      radial-gradient(
+          circle,
+          transparent 5%,
+          rgb(56, 60, 75) 5%,
+          rgb(56, 60, 75) 10%,
+          transparent 10%
+        ) -0.1875em -0.3125em
+        no-repeat,
+      radial-gradient(circle, transparent 5%, rgb(56, 60, 75) 5%, rgb(56, 60, 75) 10%, transparent 10%)
+        0.1875em -0.3125em no-repeat,
       radial-gradient(circle, rgb(237, 166, 93) 45%, transparent 45%) 0 -0.1875em,
       linear-gradient(
         transparent 35%,
@@ -355,31 +366,31 @@
 </style>
 
 <script>
-  const MINIMUM_LOADING_TIME = 200; // 最少显示时间（毫秒）
-  const loadingStartTime = Date.now();
+  const MINIMUM_LOADING_TIME = 200 // 最少显示时间（毫秒）
+  const loadingStartTime = Date.now()
 
   function hideLoading() {
-    const loadingElement = document.getElementById('loading');
+    const loadingElement = document.getElementById('loading')
     if (loadingElement && !loadingElement.classList.contains('hidden')) {
-      const elapsedTime = Date.now() - loadingStartTime;
-      const remainingTime = Math.max(0, MINIMUM_LOADING_TIME - elapsedTime);
-      
+      const elapsedTime = Date.now() - loadingStartTime
+      const remainingTime = Math.max(0, MINIMUM_LOADING_TIME - elapsedTime)
+
       if (remainingTime > 0) {
         setTimeout(() => {
-          loadingElement.classList.add('hidden');
-        }, remainingTime);
+          loadingElement.classList.add('hidden')
+        }, remainingTime)
       } else {
-        loadingElement.classList.add('hidden');
+        loadingElement.classList.add('hidden')
       }
     }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', hideLoading);
+    document.addEventListener('DOMContentLoaded', hideLoading)
   } else {
-    hideLoading();
+    hideLoading()
   }
 
-  document.addEventListener('astro:after-swap', hideLoading);
-  window.addEventListener('load', hideLoading);
+  document.addEventListener('astro:after-swap', hideLoading)
+  window.addEventListener('load', hideLoading)
 </script>
