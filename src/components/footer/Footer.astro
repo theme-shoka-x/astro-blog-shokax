@@ -63,7 +63,7 @@ const iconColor = config.icon?.color || '#ffc0cb'
         {since !== currentYear && <span>&copy; {since} -</span>}
         <span>{currentYear}</span>
         <span class="with-love inline-block mx-0.5 ml-0.5" style={`color: ${iconColor}`}>
-          <i class={`ic i-${iconName}`}></i>
+          <i class={`${iconName}`}></i>
         </span>
         <span class="author">{author} @ {siteName}</span>
       </div>
@@ -72,13 +72,13 @@ const iconColor = config.icon?.color || '#ffc0cb'
       {
         config.count && (
           <div class="count block my-2">
-            <span class="post-meta-item-icon ml-2 mr-0 inline">
-              <i class="ic i-chart-area" />
+            <span class="post-meta-item-icon mr-0 inline">
+              <div class="i-ri-line-chart-fill inline-block align-text-bottom text-1rem"></div>
             </span>
             <span title="Total words">{totalWords} words</span>
             <span class="post-meta-divider mx-2"> | </span>
-            <span class="post-meta-item-icon ml-2 mr-0 inline">
-              <i class="ic i-coffee" />
+            <span class="post-meta-item-icon mr-0 inline">
+              <div class="i-ri-cup-fill inline-block align-text-bottom text-1rem"></div>
             </span>
             <span title="Estimated reading time">{readingTimeStr}</span>
           </div>

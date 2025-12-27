@@ -1,18 +1,18 @@
-<script lang='ts'>
-  import PostMeta from './PostMeta.svelte'
+<script lang="ts">
+  import PostMeta from "./PostMeta.svelte";
 
   interface Props {
-    title: string
-    url: string
-    date: Date
-    excerpt: string
-    cover?: string
-    category?: string
-    categoryUrl?: string
-    isEven?: boolean
-    lazy?: boolean
-    wordCount?: number
-    readTime?: number
+    title: string;
+    url: string;
+    date: Date;
+    excerpt: string;
+    cover?: string;
+    category?: string;
+    categoryUrl?: string;
+    isEven?: boolean;
+    lazy?: boolean;
+    wordCount?: number;
+    readTime?: number;
   }
 
   const {
@@ -27,55 +27,55 @@
     lazy = true,
     wordCount,
     readTime,
-  }: Props = $props()
+  }: Props = $props();
 </script>
 
-<article class='segment-item' class:even={isEven}>
-  <div class='cover'>
+<article class="segment-item" class:even={isEven}>
+  <div class="cover">
     {#if cover}
-      <a href={url} title={title}>
+      <a href={url} {title}>
         <img
           src={cover}
           alt={title}
-          loading={lazy ? 'lazy' : 'eager'}
-          decoding='async'
+          loading={lazy ? "lazy" : "eager"}
+          decoding="async"
         />
       </a>
     {:else}
-      <a href={url} title={title}>
-        <div class='cover-placeholder'></div>
+      <a href={url} {title}>
+        <div class="cover-placeholder"></div>
       </a>
     {/if}
   </div>
 
-  <div class='info'>
+  <div class="info">
     <PostMeta {date} {wordCount} {readTime} />
 
     <h3>
-      <a href={url} title={title}>{title}</a>
+      <a href={url} {title}>{title}</a>
     </h3>
 
-    <div class='excerpt'>
+    <div class="excerpt">
       {excerpt}
     </div>
 
     {#if category}
-      <div class='meta-footer'>
-        <span class='category-tag'>
+      <div class="meta-footer">
+        <span class="category-tag">
           {#if categoryUrl}
             <a href={categoryUrl} title={category}>
-              <i class='i-ri-flag-line'></i>
+              <i class="i-ri-flag-line"></i>
               {category}
             </a>
           {:else}
-            <i class='i-ri-flag-line'></i>
+            <i class="i-ri-flag-line"></i>
             {category}
           {/if}
         </span>
       </div>
     {/if}
 
-    <a href={url} class='btn' title={title}>more...</a>
+    <a href={url} class="btn" {title}>more...</a>
   </div>
 </article>
 
@@ -90,7 +90,9 @@
     border-radius: 0.625rem;
     background: var(--grey-0);
     box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
     overflow: visible;
   }
 
@@ -125,7 +127,11 @@
     left: 0;
     right: auto;
     border-radius: 0 1rem;
-    background-image: linear-gradient(to right, var(--color-orange) 0, var(--color-pink) 100%);
+    background-image: linear-gradient(
+      to right,
+      var(--color-orange) 0,
+      var(--color-pink) 100%
+    );
   }
 
   .segment-item.even .meta-footer {
@@ -257,7 +263,11 @@
     padding: 0.3rem 1rem;
     border-radius: 1rem 0;
     color: var(--grey-0);
-    background-image: linear-gradient(to right, var(--color-pink) 0, var(--color-orange) 100%);
+    background-image: linear-gradient(
+      to right,
+      var(--color-pink) 0,
+      var(--color-orange) 100%
+    );
     text-decoration: none;
     font-size: 0.875rem;
     font-weight: 500;
@@ -271,7 +281,7 @@
   .btn::before {
     position: absolute;
     display: block;
-    content: '';
+    content: "";
     height: calc(100% - 1rem);
     width: calc(100% - 1rem);
     transform-style: preserve-3d;
@@ -332,7 +342,11 @@
       right: 0;
       left: auto;
       border-radius: 1rem 0;
-      background-image: linear-gradient(to right, var(--color-pink) 0, var(--color-orange) 100%);
+      background-image: linear-gradient(
+        to right,
+        var(--color-pink) 0,
+        var(--color-orange) 100%
+      );
     }
   }
 </style>

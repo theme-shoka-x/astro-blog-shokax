@@ -1,96 +1,115 @@
-<script lang='ts'>
-  import { onMount } from 'svelte'
-  import unoStyle from 'unocss-inline/style'
-  import { css } from '../assets/fonts/MapleMono-CN-Regular.ttf?subsets'
+<svelte:options customElement="code-block" />
 
-  let container = $state<HTMLElement | null>(null)
-  let copied = $state(false)
-  let codeLanguage = $state('')
-  let isDark = $state(false)
+<script lang="ts">
+  import { onMount } from "svelte";
+  import unoStyle from "unocss-inline/style";
+  import { css } from "../assets/fonts/MapleMono-CN-Regular.ttf?subsets";
+
+  let container = $state<HTMLElement | null>(null);
+  let copied = $state(false);
+  let codeLanguage = $state("");
+  let isDark = $state(false);
 
   // 复制逻辑
   async function copyCode() {
     // 获取 slot 元素，然后查询其分配的内容
-    const slot = container?.querySelector('slot') as HTMLSlotElement
-    const assignedElements = slot?.assignedElements({ flatten: true }) ?? []
-    const preElement = assignedElements.find(el => el.tagName === 'PRE') as HTMLPreElement | undefined
+    const slot = container?.querySelector("slot") as HTMLSlotElement;
+    const assignedElements = slot?.assignedElements({ flatten: true }) ?? [];
+    const preElement = assignedElements.find((el) => el.tagName === "PRE") as
+      | HTMLPreElement
+      | undefined;
 
-    if (!preElement)
-      return
+    if (!preElement) return;
 
     // 获取纯文本内容
-    const code = preElement.textContent ?? ''
+    const code = preElement.textContent ?? "";
 
     try {
-      await navigator.clipboard.writeText(code)
-      copied = true
+      await navigator.clipboard.writeText(code);
+      copied = true;
       setTimeout(() => {
-        copied = false
-      }, 3000)
-    }
-    catch (err) {
-      console.error('Failed to copy:', err)
+        copied = false;
+      }, 3000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
     }
   }
 
   // 获取语言逻辑
   function getCodeLanguage() {
     // 获取 slot 分配的元素
-    const slot = container?.querySelector('slot') as HTMLSlotElement
-    const assignedElements = slot?.assignedElements({ flatten: true }) ?? []
-    const preElement = assignedElements.find(el => el.tagName === 'PRE') as HTMLPreElement | undefined
-    if (!preElement)
-      return ''
+    const slot = container?.querySelector("slot") as HTMLSlotElement;
+    const assignedElements = slot?.assignedElements({ flatten: true }) ?? [];
+    const preElement = assignedElements.find((el) => el.tagName === "PRE") as
+      | HTMLPreElement
+      | undefined;
+    if (!preElement) return "";
 
     // 从 PRE 元素的 data-language 属性获取语言
-    const language = preElement.getAttribute('data-language')
-    return language ?? ''
+    const language = preElement.getAttribute("data-language");
+    return language ?? "";
   }
 
   onMount(() => {
-    // 检查系统/文档主题
-    isDark = document.documentElement.getAttribute('data-theme') === 'dark'
-      || document.documentElement.classList.contains('dark')
-
     // 从插入的 DOM 中分析语言
-    codeLanguage = getCodeLanguage()
+    codeLanguage = getCodeLanguage();
 
-    const shadowRoot = container?.getRootNode() as ShadowRoot | Document
+    const shadowRoot = container?.getRootNode() as ShadowRoot | Document;
     if (shadowRoot instanceof ShadowRoot) {
-      shadowRoot.appendChild(unoStyle.cloneNode(true))
+      shadowRoot.appendChild(unoStyle.cloneNode(true));
+    } else {
+      container?.appendChild(unoStyle);
     }
-    else {
-      container?.appendChild(unoStyle)
-    }
-  })
+  });
 
+  const updateTheme = () => {
+    const theme = document.documentElement.dataset.theme;
+    isDark = theme === "dark";
+  };
+
+  $effect(() => {
+    // 初始化
+    updateTheme();
+
+    // 监听 html[data-theme] 变化
+    const observer = new MutationObserver(updateTheme);
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  });
 </script>
 
 <div class="codeblock {isDark ? 'dark' : ''}">
-  <div class='header'>
-    <div class='controls'>
-      <div class='dot red'></div>
-      <div class='dot yellow'></div>
-      <div class='dot green'></div>
+  <div class="header">
+    <div class="controls">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
       {#if codeLanguage}
-        <span class='lang-text'>{codeLanguage}</span>
+        <span class="lang-text">{codeLanguage}</span>
       {/if}
     </div>
-    <div class='actions'>
+    <div class="actions">
       <button
         class="copy-btn {copied ? 'i-ri-check-fill' : 'i-ri-file-copy-fill'}"
         onclick={copyCode}
-        aria-label='Copy code'
+        aria-label="Copy code"
       ></button>
     </div>
   </div>
 
-  <div bind:this={container} class='content-wrapper' style='font-family: {css.family};'>
+  <div
+    bind:this={container}
+    class="content-wrapper"
+    style="font-family: {css.family};"
+  >
     <slot />
   </div>
 </div>
-
-<svelte:options customElement='code-block' />
 
 <style>
   /* 基础布局 */
@@ -99,7 +118,7 @@
     border-radius: 0.5rem;
     overflow: hidden;
     box-shadow: 0.5rem 0.5rem 1rem var(--grey-3);
-    font-family: 'Maple Mono', 'Courier New', monospace;
+    font-family: "Maple Mono", "Courier New", monospace;
   }
 
   .dark.codeblock {
@@ -130,9 +149,15 @@
     height: 0.9375rem;
     border-radius: 50%;
   }
-  .red { background: rgb(252, 98, 93); }
-  .yellow { background: rgb(253, 188, 64); }
-  .green { background: rgb(53, 205, 75); }
+  .red {
+    background: rgb(252, 98, 93);
+  }
+  .yellow {
+    background: rgb(253, 188, 64);
+  }
+  .green {
+    background: rgb(53, 205, 75);
+  }
 
   .lang-text {
     margin-left: 0.75rem;
@@ -163,7 +188,7 @@
 
   /* 核心：处理插槽内的样式 */
   .content-wrapper ::slotted(*) {
-    font-family: 'Maple Mono', 'Courier New', Courier, monospace;
+    font-family: "Maple Mono", "Courier New", Courier, monospace;
     font-size: 0.925rem;
     line-height: 1.25rem;
     line-break: anywhere;
@@ -181,10 +206,12 @@
 
   /* 行号样式 */
   :global(.line) {
+    color: inherit;
     text-indent: -2.5rem;
     padding-left: 2.5rem;
     display: block;
     min-height: 1.25rem;
+    contain-intrinsic-height: 24px;
   }
 
   :global(.line):hover {
@@ -215,7 +242,7 @@
   }
 
   :global(.diff .remove)::before {
-    content: '-';
+    content: "-";
     color: var(--color-red);
     font-weight: bold;
   }
@@ -225,7 +252,7 @@
   }
 
   :global(.diff .add)::before {
-    content: '+';
+    content: "+";
     color: var(--color-green);
     font-weight: bold;
   }
@@ -235,16 +262,16 @@
   }
 
   /* 暗色模式适配 */
-  :global(html[data-theme='dark']) .codeblock {
+  :global(html[data-theme="dark"]) .codeblock {
     box-shadow: none;
   }
 
-  :global(html[data-theme='dark']) .content-wrapper ::slotted(pre) {
+  :global(html[data-theme="dark"]) .content-wrapper ::slotted(pre) {
     background-color: #1a1a1a !important;
   }
 
-  :global(html[data-theme='dark']) :global(.shiki),
-  :global(html[data-theme='dark']) :global(.shiki span) {
+  :global(html[data-theme="dark"]) :global(.shiki),
+  :global(html[data-theme="dark"]) :global(.shiki span) {
     font-style: var(--shiki-dark-font-style) !important;
     font-weight: var(--shiki-dark-font-weight) !important;
     text-decoration: var(--shiki-dark-text-decoration) !important;

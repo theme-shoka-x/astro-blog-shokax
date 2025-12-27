@@ -1,25 +1,25 @@
-<script lang='ts'>
-  import type { Snippet } from 'svelte'
+<script lang="ts">
+  import type { Snippet } from "svelte";
 
   interface Props {
-    id?: string
-    title?: string
-    isActive?: boolean
-    class?: string
-    children?: Snippet
+    id?: string;
+    title?: string;
+    isActive?: boolean;
+    class?: string;
+    children?: Snippet;
   }
 
   const {
-    id = '',
-    title = '',
+    id = "",
+    title = "",
     isActive = false,
-    class: className = '',
+    class: className = "",
     children,
-  }: Props = $props()
+  }: Props = $props();
 </script>
 
 <div
-  class={`panel ${id} ${isActive ? 'active' : ''} ${className}`}
+  class={`panel ${id} ${isActive ? "active" : ""} ${className}`}
   data-title={title}
 >
   {#if children}
@@ -32,6 +32,7 @@
     display: none;
     padding: 0.875rem 0.9375rem 2rem;
     animation: slideIn 0.3s ease-in-out;
+    content-visibility: auto;
   }
 
   .panel.active {

@@ -54,7 +54,10 @@ export default defineConfig({
   },
   markdown: {
     shikiConfig: {
-      theme: "vitesse-light",
+      themes: {
+        light: "vitesse-light",
+        dark: "vitesse-dark",
+      },
       transformers: [transformerColorizedBrackets()],
     },
     remarkPlugins: [

@@ -1,23 +1,23 @@
-<script lang='ts'>
+<script lang="ts">
   interface PostInfo {
-    title: string
-    url: string
+    title: string;
+    url: string;
   }
 
   interface Props {
-    name: string
-    url: string
-    cover?: string
+    name: string;
+    url: string;
+    cover?: string;
     topCategory?: {
-      name: string
-      url: string
-    }
-    postCount: number
-    childCount?: number
-    posts: PostInfo[]
-    isActive?: boolean
-    onMouseEnter?: () => void
-    onMouseLeave?: () => void
+      name: string;
+      url: string;
+    };
+    postCount: number;
+    childCount?: number;
+    posts: PostInfo[];
+    isActive?: boolean;
+    onMouseEnter?: () => void;
+    onMouseLeave?: () => void;
   }
 
   const {
@@ -31,63 +31,60 @@
     isActive = false,
     onMouseEnter,
     onMouseLeave,
-  }: Props = $props()
+  }: Props = $props();
 
   function handleMouseEnter() {
     if (onMouseEnter) {
-      onMouseEnter()
+      onMouseEnter();
     }
   }
 
   function handleMouseLeave() {
     if (onMouseLeave) {
-      onMouseLeave()
+      onMouseLeave();
     }
   }
 
   function handleTouchStart() {
     if (onMouseEnter) {
-      onMouseEnter()
+      onMouseEnter();
     }
   }
 
   const countText = $derived(() => {
-    let text = ''
+    let text = "";
     if (childCount > 0) {
-      text += `${childCount} 个子分类 `
+      text += `${childCount} 个子分类 `;
     }
-    text += `${postCount} 篇文章`
-    return text
-  })
+    text += `${postCount} 篇文章`;
+    return text;
+  });
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <section
-  class='item'
+  class="item"
   class:active={isActive}
   onmouseenter={handleMouseEnter}
   onmouseleave={handleMouseLeave}
   ontouchstart={handleTouchStart}
 >
-  <div
-    class='cover'
-    style={cover ? `background-image: url(${cover})` : ''}
-  >
-    <h2 class='title'>{name}</h2>
+  <div class="cover" style={cover ? `background-image: url(${cover})` : ""}>
+    <h2 class="title">{name}</h2>
     {#if topCategory}
       <span>{topCategory.name}</span>
     {/if}
   </div>
 
-  <div class='info'>
-    <div class='ribbon'>
-      <a href={url} title={name} itemprop='url'>
+  <div class="info">
+    <div class="ribbon">
+      <a href={url} title={name} itemprop="url">
         {name}
       </a>
     </div>
 
-    <div class='inner'>
-      <ul class='posts'>
+    <div class="inner">
+      <ul class="posts">
         {#each posts.slice(0, 6) as post}
           <li>
             <a href={post.url} title={post.title}>
@@ -97,23 +94,23 @@
         {/each}
       </ul>
 
-      <div class='meta footer'>
+      <div class="meta footer">
         {#if topCategory}
           <span>
-            <a href={topCategory.url} title={topCategory.name} itemprop='url'>
-              <i class='i-ri-flag-line'></i>
+            <a href={topCategory.url} title={topCategory.name} itemprop="url">
+              <i class="i-ri-flag-line"></i>
               {topCategory.name}
             </a>
           </span>
         {/if}
         <span>
-          <i class='i-ri-file-line'></i>
+          <i class="i-ri-file-line"></i>
           {countText()}
         </span>
       </div>
     </div>
 
-    <a href={url} class='btn' title={name} itemprop='url'>more...</a>
+    <a href={url} class="btn" title={name} itemprop="url">more...</a>
   </div>
 </section>
 
@@ -129,6 +126,7 @@
     perspective: 62.5rem;
     /* 防止动画导致CLS - 预留空间 */
     will-change: opacity, transform;
+    contain-intrinsic-height: 14rem;
   }
 
   :global(.item.show) {
@@ -167,7 +165,11 @@
   .cover {
     background-position: center;
     background-size: cover;
-    background-image: linear-gradient(to bottom right, var(--color-pink), var(--color-orange));
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-pink),
+      var(--color-orange)
+    );
     padding: 0.5rem 1rem;
     font-size: 1.125rem;
     color: var(--header-text-color, #fff);
@@ -179,7 +181,7 @@
   .cover::before {
     position: absolute;
     display: block;
-    content: '';
+    content: "";
     top: 0;
     left: 0;
     right: 0;
@@ -242,12 +244,16 @@
     max-width: calc(100% + 2rem);
     padding: 0 1rem 0 2rem;
     border-radius: 0 0.3rem 0.3rem 0;
-    background-image: linear-gradient(to right, var(--color-orange) 0, var(--color-pink) 100%);
+    background-image: linear-gradient(
+      to right,
+      var(--color-orange) 0,
+      var(--color-pink) 100%
+    );
     color: var(--grey-0);
   }
 
   .ribbon::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 100%;
     left: 0;
@@ -282,10 +288,17 @@
     to {
       transform: translate3d(0, 0, 0);
     }
-    10%, 30%, 50%, 70%, 90% {
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
       transform: translate3d(-10px, 0, 0);
     }
-    20%, 40%, 60%, 80% {
+    20%,
+    40%,
+    60%,
+    80% {
       transform: translate3d(10px, 0, 0);
     }
   }
@@ -364,7 +377,11 @@
     padding: 0.3rem 1rem;
     border-radius: 1rem 0;
     color: var(--grey-0);
-    background-image: linear-gradient(to right, var(--color-pink) 0, var(--color-orange) 100%);
+    background-image: linear-gradient(
+      to right,
+      var(--color-pink) 0,
+      var(--color-orange) 100%
+    );
     text-decoration: none;
     transition: transform 0.3s ease;
   }
@@ -372,7 +389,7 @@
   .btn::before {
     position: absolute;
     display: block;
-    content: '';
+    content: "";
     height: calc(100% - 1rem);
     width: calc(100% - 1rem);
     transform-style: preserve-3d;

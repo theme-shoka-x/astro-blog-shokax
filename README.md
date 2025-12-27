@@ -2,12 +2,21 @@
 
 这是 [Hexo Theme ShokaX](https://github.com/theme-shoka-x/hexo-theme-shokaX) 在 Astro 上的重构版本，使用 Astro + Svelte 5 + UnoCSS 技术栈
 
-在 Astro 版本的 ShokaX 上，得益于底层技术的进步，我们实现了：
+本项目建议使用 [Bun](https://bun.sh/) 运行，不保证与 Nodejs 的兼容性
 
-- 视图过渡动画
-- 更好的动画与视觉效果
-- 基于 Typescript 的现代统一配置系统
+您可以直接将本仓库 Clone 到本地或者创建一个 Fork（并为我们点一个 Star 😜），我们建议使用后者，这样在我们发布更新时您可以更轻松地迁移到新版本。
+然后进入如下操作：
+```bash
+bun install
 
+# 启动开发服务器
+bun run dev
+
+# 构建生产版本
+bun run build
+```
+
+本仓库自带`vercel.json`和`netlify.toml`以提供在对应平台上的安全性与缓存优化，您可以直接将本仓库部署到相关平台上
 
 ## 备注
 
