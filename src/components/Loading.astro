@@ -366,12 +366,12 @@
 </style>
 
 <script>
-  const MINIMUM_LOADING_TIME = 500
+  const MINIMUM_LOADING_TIME = 1000
   const startTime = performance.now()
   const SESSION_KEY = 'hasShownLoading'
 
   // TODO: 仅在第一次访问时显示加载动画
-  window.addEventListener('DOMContentLoaded',() => {
+  window.addEventListener('load',() => {
     const loading = document.getElementById('loading')
     if (!loading) return
 
