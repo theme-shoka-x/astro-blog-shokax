@@ -1,31 +1,41 @@
 ---
-import Layout from '@/layouts/Layout.astro'
-import Breadcrumb from '@/components/post/Breadcrumb.astro'
-import PostHeader from '@/components/post/PostHeader.astro'
-import PostFooter from '@/components/post/PostFooter.astro'
-import PostNav from '@/components/post/PostNav.astro'
-import { getCollection, render } from 'astro:content'
-import themeConfig from '@/theme.config'
-import type { TocItem, QuickNavigation } from '@/components/sidebar/SidebarTypes'
+import Layout from "@/layouts/Layout.astro";
+import Breadcrumb from "@/components/post/Breadcrumb.astro";
+import PostHeader from "@/components/post/PostHeader.astro";
+import PostFooter from "@/components/post/PostFooter.astro";
+import PostNav from "@/components/post/PostNav.astro";
+import { getCollection, render } from "astro:content";
+import themeConfig from "@/theme.config";
+import type {
+  TocItem,
+  QuickNavigation,
+} from "@/components/sidebar/SidebarTypes";
 
-import '@/styles/post.css'
+import "@/styles/post.css";
+
+import "katex/dist/katex-swap.min.css";
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts')
+  const posts = await getCollection("posts");
   const sortedPosts = posts
     .filter((post) => !post.data.draft)
-    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
   return sortedPosts.map((post, index) => {
-    const prevPost = index > 0 ? sortedPosts[index - 1] : undefined
-    const nextPost = index < sortedPosts.length - 1 ? sortedPosts[index + 1] : undefined
+    const prevPost = index > 0 ? sortedPosts[index - 1] : undefined;
+    const nextPost =
+      index < sortedPosts.length - 1 ? sortedPosts[index + 1] : undefined;
 
     // Get related posts from the same category
-    const categories = post.data.categories || []
+    const categories = post.data.categories || [];
     const relatedPosts =
       categories.length > 0
         ? sortedPosts
-            .filter((p) => p.id !== post.id && p.data.categories?.some((c) => categories.includes(c)))
+            .filter(
+              (p) =>
+                p.id !== post.id &&
+                p.data.categories?.some((c) => categories.includes(c)),
+            )
             .slice(0, 10)
             .map((p) => ({
               slug: p.id,
@@ -33,7 +43,7 @@ export async function getStaticPaths() {
               date: p.data.date,
               category: p.data.categories?.[0],
             }))
-        : []
+        : [];
 
     return {
       params: { slug: post.id },
@@ -57,40 +67,40 @@ export async function getStaticPaths() {
           : undefined,
         relatedPosts,
       },
-    }
-  })
+    };
+  });
 }
 
 const { post, prevPost, nextPost, relatedPosts } = Astro.props as {
-  post: import('astro:content').CollectionEntry<'posts'>
+  post: import("astro:content").CollectionEntry<"posts">;
   prevPost?: {
-    title: string
-    slug: string
-    category?: string
-    cover?: string
-  }
+    title: string;
+    slug: string;
+    category?: string;
+    cover?: string;
+  };
   nextPost?: {
-    title: string
-    slug: string
-    category?: string
-    cover?: string
-  }
+    title: string;
+    slug: string;
+    category?: string;
+    cover?: string;
+  };
   relatedPosts: {
-    slug: string
-    title: string
-    date: Date
-    category?: string
-  }[]
-}
+    slug: string;
+    title: string;
+    date: Date;
+    category?: string;
+  }[];
+};
 
-const { Content, headings } = await render(post)
+const { Content, headings } = await render(post);
 
 // Build TOC from headings
 const toc: TocItem[] = headings.map((h) => ({
   id: h.slug,
   text: h.text,
   level: h.depth,
-}))
+}));
 
 // Build quick navigation
 const navigation: QuickNavigation = {
@@ -98,29 +108,31 @@ const navigation: QuickNavigation = {
   prevTitle: prevPost?.title,
   nextUrl: nextPost ? `/posts/${nextPost.slug}` : undefined,
   nextTitle: nextPost?.title,
-}
+};
 
 // Calculate word count from content
-const plainText = (post.body || '').replace(/[#*`_[\]()]/g, '').replace(/\s+/g, ' ')
-const wordCount = plainText.length
+const plainText = (post.body || "")
+  .replace(/[#*`_[\]()]/g, "")
+  .replace(/\s+/g, " ");
+const wordCount = plainText.length;
 
 // Calculate read time (assume 300 words per minute)
-const readTime = Math.ceil(wordCount / 300)
+const readTime = Math.ceil(wordCount / 300);
 
 // Get site info from config
-const siteConfig = themeConfig.sidebar || {}
-const author = siteConfig.author || 'Author'
-const siteName = themeConfig.siteName || 'Site'
+const siteConfig = themeConfig.sidebar || {};
+const author = siteConfig.author || "Author";
+const siteName = themeConfig.siteName || "Site";
 
 // Build permalink
-const permalink = `${Astro.site?.toString()}posts/${post.id}`
+const permalink = `${Astro.site?.toString()}posts/${post.id}`;
 
 // Build postMeta for Brand component
 const postMeta = {
   date: post.data.date,
   wordCount,
   readTime,
-}
+};
 ---
 
 <Layout
@@ -132,62 +144,91 @@ const postMeta = {
   postMeta={postMeta}
 >
   <Fragment slot="head">
-    <meta name="description" content={post.data.description || post.body?.slice(0, 150).replace(/\s+/g, ' ')} />
+    <meta
+      name="description"
+      content={post.data.description ||
+        post.body?.slice(0, 150).replace(/\s+/g, " ")}
+    />
   </Fragment>
 
-  <div class="article wrap">
-    <Breadcrumb categories={post.data.categories} />
+  <Fragment>
+    <div class="article wrap">
+      <Breadcrumb categories={post.data.categories} />
 
-    <article itemscope itemtype="http://schema.org/Article" class="post block" data-pagefind-body lang="zh-CN">
-      <link itemprop="mainEntityOfPage" href={permalink} />
+      <article
+        itemscope
+        itemtype="http://schema.org/Article"
+        class="post block"
+        data-pagefind-body
+        lang="zh-CN"
+      >
+        <link itemprop="mainEntityOfPage" href={permalink} />
 
-      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <meta itemprop="image" content={siteConfig.avatar || '/avatar.jpg'} />
-        <meta itemprop="name" content={author} />
-        <meta itemprop="description" content={`${siteName}`} />
-      </span>
+        <span
+          hidden
+          itemprop="author"
+          itemscope
+          itemtype="http://schema.org/Person"
+        >
+          <meta itemprop="image" content={siteConfig.avatar || "/avatar.jpg"} />
+          <meta itemprop="name" content={author} />
+          <meta itemprop="description" content={`${siteName}`} />
+        </span>
 
-      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content={siteName} />
-      </span>
+        <span
+          hidden
+          itemprop="publisher"
+          itemscope
+          itemtype="http://schema.org/Organization"
+        >
+          <meta itemprop="name" content={siteName} />
+        </span>
 
-      <PostHeader
-        title={post.data.title}
-        link={post.data.link}
-        date={post.data.date}
-        updated={post.data.updated}
-        wordCount={wordCount}
-      />
+        <PostHeader
+          title={post.data.title}
+          link={post.data.link}
+          date={post.data.date}
+          updated={post.data.updated}
+          wordCount={wordCount}
+        />
 
-      <div class="body md" itemprop="articleBody" data-pagefind-body>
-        <Content />
+        <div class="body md" itemprop="articleBody" data-pagefind-body>
+          <Content />
 
-        {
-          post.data.tags && post.data.tags.length > 0 && (
-            <div class="tags">
-              {post.data.tags.map((tag) => (
-                <a href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`} rel="tag">
-                  <i class="ic i-ri-price-tag-3-line" />
-                  {tag}
-                </a>
-              ))}
-            </div>
-          )
-        }
-      </div>
+          {
+            post.data.tags && post.data.tags.length > 0 && (
+              <div class="tags">
+                {post.data.tags.map((tag) => (
+                  <a
+                    href={`/tags/${tag.toLowerCase().replace(/\s+/g, "-")}`}
+                    rel="tag"
+                  >
+                    <i class="ic i-ri-price-tag-3-line" />
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            )
+          }
+        </div>
 
-      <PostFooter
-        date={post.data.date}
-        updated={post.data.updated}
-        permalink={permalink}
-        title={post.data.title}
-        author={author}
-        siteName={siteName}
-        showCopyright={true}
-        showReward={false}
-      />
-    </article>
-  </div>
+        <PostFooter
+          date={post.data.date}
+          updated={post.data.updated}
+          permalink={permalink}
+          title={post.data.title}
+          author={author}
+          siteName={siteName}
+          showCopyright={true}
+          showReward={false}
+        />
+      </article>
+    </div>
 
-  <PostNav prevPost={prevPost} nextPost={nextPost} enableGradientCover={themeConfig.cover?.enableNextGradientCover} />
+    <PostNav
+      prevPost={prevPost}
+      nextPost={nextPost}
+      enableGradientCover={themeConfig.cover?.enableNextGradientCover}
+    />
+  </Fragment>
 </Layout>

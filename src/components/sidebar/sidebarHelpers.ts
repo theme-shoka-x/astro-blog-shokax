@@ -1,6 +1,5 @@
 /**
  * Sidebar behavior utilities
- * Migrated from old_project/hexo-theme-shokaX/source/js/_app/components/sidebar.ts
  */
 
 import type { TocItem } from "./SidebarTypes";

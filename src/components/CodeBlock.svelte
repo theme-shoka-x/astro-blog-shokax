@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import unoStyle from "unocss-inline/style";
+  // import unoStyle from "unocss-inline/style";
   import { css } from "../assets/fonts/MapleMono-CN-Regular.ttf?subsets";
 
   let container = $state<HTMLElement | null>(null);
@@ -50,15 +50,16 @@
     return language ?? "";
   }
 
-  onMount(() => {
+  onMount(async () => {
+    const unoStyle = await import("unocss-inline/style");
     // 从插入的 DOM 中分析语言
     codeLanguage = getCodeLanguage();
 
     const shadowRoot = container?.getRootNode() as ShadowRoot | Document;
     if (shadowRoot instanceof ShadowRoot) {
-      shadowRoot.appendChild(unoStyle.cloneNode(true));
+      shadowRoot.appendChild(unoStyle.default.cloneNode(true));
     } else {
-      container?.appendChild(unoStyle);
+      container?.appendChild(unoStyle.default);
     }
   });
 

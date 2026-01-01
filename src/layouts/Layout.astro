@@ -22,8 +22,6 @@ import "@/styles/style.css";
 import "@/styles/header-cover.css";
 import "@/components/footer/footer.css";
 
-// Import CodeBlock to define custom element
-import CodeBlock from "@/components/CodeBlock.svelte";
 import Loading from "@/components/Loading.astro";
 import { covers } from "@/components/Images.astro";
 
@@ -77,6 +75,9 @@ const siteState = {
     return acc;
   }, new Set()).size,
 };
+
+// Import CodeBlock to define custom element
+import CodeBlock from "@/components/CodeBlock.svelte";
 ---
 
 <!doctype html>
@@ -105,40 +106,9 @@ const siteState = {
     }
 
     <title>{pageTitle}</title>
-    <script>
-      // 方法1: 检查元素是否在 DOM 中但未渲染
-      console.log(
-        "DOMContentLoaded时main存在吗:",
-        document.querySelector("main"),
-      );
-
-      document.addEventListener("DOMContentLoaded", () => {
-        console.log("DOMContentLoaded时main:", document.querySelector("main"));
-      });
-
-      window.addEventListener("load", () => {
-        console.log("Load时main:", document.querySelector("main"));
-      });
-
-      // 方法2: 持续检查
-      let checkCount = 0;
-      const interval = setInterval(() => {
-        const main = document.querySelector("main");
-        console.log(`检查 ${checkCount++}:`, {
-          exists: !!main,
-          visible: main?.offsetParent !== null,
-          computed: main ? getComputedStyle(main).display : "N/A",
-        });
-
-        if (checkCount > 20) clearInterval(interval);
-      }, 100);
-    </script>
   </head>
   <body>
-    <div class="hidden">
-      <CodeBlock client:only />
-    </div>
-    <!-- <Loading /> -->
+    <Loading />
     <div id="container">
       <HeaderCover
         enableCover={coverConfig.enableCover}
@@ -221,6 +191,9 @@ const siteState = {
         initializeCodeBlock(".astro-code");
       });
     </script>
+    <div class="hidden">
+      <CodeBlock client:idle />
+    </div>
   </body>
 </html>
 

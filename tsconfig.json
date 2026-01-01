@@ -5,7 +5,9 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["vite-plugin-font/src/font", "@types/bun"]
+    "types": ["vite-plugin-font/src/font", "@types/bun"],
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true
   },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]
