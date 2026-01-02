@@ -90,7 +90,6 @@ const { posts = [] } = Astro.props;
     transition:
       opacity 0.6s ease-out,
       transform 0.6s ease-out;
-    /* 防止动画引起的 CLS */
     min-height: 14rem;
     will-change: opacity, transform;
   }
@@ -98,6 +97,5 @@ const { posts = [] } = Astro.props;
   article.segment-item.show {
     opacity: 1;
     transform: translateY(0);
-    will-change: auto;
   }
 </style>

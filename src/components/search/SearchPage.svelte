@@ -105,7 +105,7 @@
   .pagefind {
     scrollbar-width: thin;
     scrollbar-color: var(--grey-5) transparent;
-    border: 2px solid var(--grey-3);
+    border: 1px solid var(--grey-2);
   }
 
   .pagefind-hidden {

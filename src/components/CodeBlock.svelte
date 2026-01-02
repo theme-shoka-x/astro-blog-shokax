@@ -189,7 +189,7 @@
   }
 
   /* 核心：处理插槽内的样式 */
-  .content-wrapper ::slotted(*) {
+  :global(code-block pre *) {
     font-family: "Maple Mono", "Courier New", Courier, monospace;
     font-size: 0.925rem;
     line-height: 1.25rem;
@@ -197,7 +197,7 @@
     white-space: break-spaces;
   }
 
-  .content-wrapper ::slotted(pre) {
+  :global(code-block pre) {
     padding: 0.925rem;
     margin: 0;
     border-bottom-right-radius: 0.5rem;
@@ -206,8 +206,12 @@
     overflow-x: auto;
   }
 
+  :global(html[data-theme="dark"] code-block span) {
+    color: var(--shiki-dark) !important;
+  }
+
   /* 行号样式 */
-  :global(.line) {
+  :global(code-block .line) {
     color: inherit;
     text-indent: -2.5rem;
     padding-left: 2.5rem;
@@ -216,18 +220,18 @@
     contain-intrinsic-height: 24px;
   }
 
-  :global(.line):hover {
+  :global(code-block .line):hover {
     background-color: var(--grey-2);
   }
 
-  :global(code) {
+  :global(code-block code) {
     counter-reset: step;
     counter-increment: step 0;
     display: flex;
     flex-direction: column;
   }
 
-  :global(code .line::before) {
+  :global(code-block code .line::before) {
     content: counter(step);
     counter-increment: step;
     width: 1rem;
@@ -238,51 +242,32 @@
   }
 
   /* Diff 高亮 */
-  :global(.diff .remove) {
+  :global(code-block .diff .remove) {
     background-color: var(--color-red);
     opacity: 0.7;
   }
 
-  :global(.diff .remove)::before {
+  :global(code-block .diff .remove)::before {
     content: "-";
     color: var(--color-red);
     font-weight: bold;
   }
 
-  :global(.diff .add) {
+  :global(code-block .diff .add) {
     background-color: var(--color-green);
   }
 
-  :global(.diff .add)::before {
+  :global(code-block .diff .add)::before {
     content: "+";
     color: var(--color-green);
     font-weight: bold;
   }
 
-  :global(.diff .highlighted) {
+  :global(code-block .diff .highlighted) {
     background-color: var(--grey-4);
   }
 
-  /* 暗色模式适配 */
-  .dark .codeblock {
+  :global(code-block .dark) {
     box-shadow: none;
-  }
-
-  .dark .content-wrapper ::slotted(pre) {
-    background-color: #1a1a1a !important;
-  }
-
-  .dark :global(.shiki),
-  .dark :global(.shiki span) {
-    font-style: var(--shiki-dark-font-style) !important;
-    font-weight: var(--shiki-dark-font-weight) !important;
-    text-decoration: var(--shiki-dark-text-decoration) !important;
-  }
-
-  .dark :global(.shiki),
-  .dark :global(.shiki span) {
-    font-style: var(--shiki-dark-font-style) !important;
-    font-weight: var(--shiki-dark-font-weight) !important;
-    text-decoration: var(--shiki-dark-text-decoration) !important;
   }
 </style>
