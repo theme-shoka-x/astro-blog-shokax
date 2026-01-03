@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const postUrl = `/posts/${post.id}`;
+const postUrl = `/posts/${post.id}/`;
 const publicDescription =
   post.data.description || post.body?.substring(0, 300) || "";
 const lastCategory = post.data.categories?.[post.data.categories.length - 1];
