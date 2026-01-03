@@ -1,12 +1,14 @@
 <svelte:options customElement="code-block" />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { css } from "../assets/fonts/MapleMono-CN-Regular.ttf?subsets";
   import ArrowDownSLine from "@/assets/icons/arrow-down-s-line.svg";
   import ArrowUpSLine from "@/assets/icons/arrow-up-s-line.svg";
   import CheckFill from "@/assets/icons/check-fill.svg";
   import FileCopyFill from "@/assets/icons/file-copy-fill.svg";
+  import FullscreenLine from "@/assets/icons/fullscreen-line.svg";
+  import FullscreenExitLine from "@/assets/icons/fullscreen-exit-line.svg";
 
   let container = $state<HTMLElement | null>(null);
   let copied = $state(false);
@@ -14,6 +16,9 @@
   let isDark = $state(false);
   let isCollapsed = $state(false);
   let shouldShowCollapse = $state(false);
+  let isFullscreen = $state(false);
+  let isExiting = $state(false);
+  let codeblockElement = $state<HTMLElement | null>(null);
 
   const COLLAPSE_THRESHOLD = 15;
 
@@ -76,6 +81,33 @@
     isCollapsed = !isCollapsed;
   }
 
+  function toggleFullscreen() {
+    if (isFullscreen) {
+      // 退出全屏：先播放退出动画
+      isExiting = true;
+      setTimeout(() => {
+        isFullscreen = false;
+        isExiting = false;
+        if (typeof document !== "undefined") {
+          document.body.style.overflow = "";
+        }
+      }, 300); // 与动画时长一致
+    } else {
+      // 进入全屏
+      isFullscreen = true;
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "hidden";
+      }
+    }
+  }
+
+  // 监听 ESC 键退出全屏
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.key === "Escape" && isFullscreen) {
+      toggleFullscreen();
+    }
+  }
+
   onMount(async () => {
     codeLanguage = getCodeLanguage();
 
@@ -83,6 +115,20 @@
     setTimeout(() => {
       checkCodeLength();
     }, 100);
+
+    // 添加键盘事件监听
+    if (typeof window !== "undefined") {
+      window.addEventListener("keydown", handleKeydown);
+    }
+  });
+
+  onDestroy(() => {
+    if (typeof window !== "undefined") {
+      window.removeEventListener("keydown", handleKeydown);
+    }
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "";
+    }
   });
 
   const updateTheme = () => {
@@ -104,7 +150,12 @@
   });
 </script>
 
-<div class="codeblock {isDark ? 'dark' : ''}">
+<div
+  bind:this={codeblockElement}
+  class="codeblock {isDark ? 'dark' : ''} {isFullscreen
+    ? 'fullscreen'
+    : ''} {isExiting ? 'exiting' : ''}"
+>
   <div class="header">
     <div class="controls">
       <div class="dot red"></div>
@@ -116,7 +167,7 @@
     </div>
     <div class="actions">
       <button
-        class="copy-btn"
+        class="action-btn"
         style="mask-image: url({copied
           ? CheckFill.src
           : FileCopyFill.src}); -webkit-mask-image: url({copied
@@ -124,6 +175,16 @@
           : FileCopyFill.src});"
         onclick={copyCode}
         aria-label="Copy code"
+      ></button>
+      <button
+        class="action-btn"
+        style="mask-image: url({isFullscreen
+          ? FullscreenExitLine.src
+          : FullscreenLine.src}); -webkit-mask-image: url({isFullscreen
+          ? FullscreenExitLine.src
+          : FullscreenLine.src});"
+        onclick={toggleFullscreen}
+        aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
       ></button>
     </div>
   </div>
@@ -137,7 +198,7 @@
       <slot />
     </div>
 
-    {#if shouldShowCollapse}
+    {#if shouldShowCollapse && !isFullscreen}
       <button
         class="collapse-btn"
         style="mask-image: url({isCollapsed
@@ -210,11 +271,12 @@
   .actions {
     display: flex;
     flex-direction: row;
+    gap: 0.75rem;
     padding-right: 1.5rem;
     color: var(--grey-5);
   }
 
-  .copy-btn {
+  .action-btn {
     border: none;
     cursor: pointer;
     background-color: var(--grey-5);
@@ -229,7 +291,7 @@
     transition: background-color 0.2s;
   }
 
-  .copy-btn:hover {
+  .action-btn:hover {
     background-color: var(--grey-4);
   }
 
@@ -381,5 +443,75 @@
 
   :global(code-block .dark) {
     box-shadow: none;
+  }
+
+  /* 全屏样式 */
+  .fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    z-index: 9999;
+    border-radius: 0;
+    animation: fullscreenIn 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+  .fullscreen .header {
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  .fullscreen .content-container {
+    flex: 1;
+    overflow: auto;
+    max-height: none !important;
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
+
+  .fullscreen .content-container.collapsed {
+    max-height: none !important;
+  }
+
+  .fullscreen .content-container::after {
+    display: none;
+  }
+
+  .fullscreen :global(pre) {
+    border-radius: 0 0 0.5rem 0.5rem !important;
+  }
+
+  @keyframes fullscreenIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .exiting {
+    animation: fullscreenOut 0.3s ease-in forwards;
+  }
+
+  @keyframes fullscreenOut {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95);
+    }
   }
 </style>

@@ -1,6 +1,6 @@
 export type ThemeMode = "light" | "dark";
 
-const STORAGE_KEY = "vueuse-color-scheme";
+const STORAGE_KEY = "shokax-color-scheme";
 
 function getStoredTheme(win: Window): ThemeMode | null {
   try {
@@ -8,7 +8,7 @@ function getStoredTheme(win: Window): ThemeMode | null {
     if (stored === "light" || stored === "dark") return stored;
   } catch (err) {
     // Ignore storage errors (private mode, etc.)
-    console.warn("[navbar] Unable to read theme from storage", err);
+    console.warn("[ShokaX] Unable to read theme from storage", err);
   }
   return null;
 }
@@ -35,7 +35,7 @@ export function toggleTheme(doc: Document, win: Window, current: ThemeMode): The
   try {
     win.localStorage.setItem(STORAGE_KEY, next);
   } catch (err) {
-    console.warn("[navbar] Unable to persist theme", err);
+    console.warn("[ShokaX] Unable to persist theme", err);
   }
   return next;
 }
