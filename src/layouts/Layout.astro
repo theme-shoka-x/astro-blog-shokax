@@ -30,6 +30,9 @@ import { toTagHref } from "@/toolkit/posts/url";
 import Footer from "@/components/footer/Footer.astro";
 import type { ImageMetadata } from "astro";
 import { currentLocale } from "@/i18n";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 // Accept sidebar props from child pages
 interface PostMeta {
@@ -88,6 +91,66 @@ const ActiveLayout = enableThirdColumn ? ThreeColumnLayout : TwoColumnLayout;
 const fixedCover = coverConfig.fixedCover?.enable
   ? resolveFixedCover(coverConfig.fixedCover.url)
   : undefined;
+type HeaderCarouselCover = ImageMetadata | string;
+
+function normalizeCarouselCoverPayload(payload: unknown): string[] {
+  if (Array.isArray(payload)) {
+    return payload.filter((item): item is string => typeof item === "string" && item.trim().length > 0);
+  }
+
+  if (typeof payload === "object" && payload !== null) {
+    const record = payload as Record<string, unknown>;
+    if (Array.isArray(record.images)) {
+      return record.images.filter(
+        (item): item is string => typeof item === "string" && item.trim().length > 0,
+      );
+    }
+    if (Array.isArray(record.urls)) {
+      return record.urls.filter(
+        (item): item is string => typeof item === "string" && item.trim().length > 0,
+      );
+    }
+  }
+
+  return [];
+}
+
+async function loadCarouselSource(source?: string): Promise<string[]> {
+  if (!source) return [];
+
+  try {
+    if (/^https?:\/\//.test(source)) {
+      const response = await fetch(source);
+      if (!response.ok) return [];
+      const payload = (await response.json()) as unknown;
+      return normalizeCarouselCoverPayload(payload);
+    }
+
+    if (source.startsWith("/")) {
+      const projectRoot = path.dirname(fileURLToPath(import.meta.url));
+      const rootDir = path.resolve(projectRoot, "../..");
+      const filePath = path.join(rootDir, "public", source.replace(/^\//, ""));
+      const raw = await readFile(filePath, "utf-8");
+      return normalizeCarouselCoverPayload(JSON.parse(raw) as unknown);
+    }
+  } catch {
+    return [];
+  }
+
+  return [];
+}
+
+const directCarouselUrls = (coverConfig.carouselUrls || []).filter(
+  (item): item is string => typeof item === "string" && item.trim().length > 0,
+);
+const sourceCarouselUrls =
+  directCarouselUrls.length > 0 ? [] : await loadCarouselSource(coverConfig.carouselSource);
+const headerCarouselCovers: HeaderCarouselCover[] =
+  directCarouselUrls.length > 0
+    ? directCarouselUrls
+    : sourceCarouselUrls.length > 0
+      ? sourceCarouselUrls
+      : covers;
 const resolvedHeaderCover = pageCover ?? fixedCover;
 
 // Get all posts for widgets
@@ -183,7 +246,7 @@ import SearchPage from "@/components/search/SearchPage.svelte";
         preload={coverConfig.preload}
         fixedCover={resolvedHeaderCover}
         gradient={coverConfig.gradient}
-        covers={covers}
+        covers={headerCarouselCovers}
         title={brandConfig.title}
       />
       <Brand

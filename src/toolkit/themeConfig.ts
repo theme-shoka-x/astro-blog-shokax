@@ -64,6 +64,22 @@ interface CoverConfig {
   };
 
   /**
+   * 远端/字符串轮播图列表。
+   * - 仅在 fixedCover 未启用且 gradient 为 false 时参与轮播
+   * - 适用于直接在配置中填写一组 URL
+   */
+  carouselUrls?: string[];
+
+  /**
+   * 轮播图 JSON 数据源。
+   * - 支持 public 下的本地 JSON 路径（如 "/carousel-covers.json"）
+   * - 也支持远程 JSON URL（构建时拉取）
+   * - 当 carouselUrls 非空时，优先使用 carouselUrls
+   * - JSON 允许两种格式：字符串数组，或 { images: string[] } / { urls: string[] }
+   */
+  carouselSource?: string;
+
+  /**
    * 是否使用渐变背景封面。
    * - true：使用必应 API 获取每日图片作为封面
    * - false：使用预设封面图片或轮播

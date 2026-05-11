@@ -7,7 +7,7 @@ interface Props {
   preload?: boolean
   fixedCover?: ImageMetadata | string
   gradient?: boolean
-  covers?: ImageMetadata[]
+  covers?: Array<ImageMetadata | string>
   title?: string
 }
 
@@ -21,7 +21,7 @@ const {
 
 // 是否显示多图轮播
 const isMultipleImages =
-  !fixedCover && !gradient && covers.length === 6
+  !fixedCover && !gradient && covers.length > 1
 
 // 单图模式图片来源
 const singleImage =
