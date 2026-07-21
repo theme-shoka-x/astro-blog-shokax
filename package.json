@@ -42,7 +42,7 @@
     "@unocss/extractor-svelte": "^66.7.4",
     "@vtbag/element-crossing": "^1.1.0",
     "@waline/client": "^3.15.2",
-    "astro": "7.0.6",
+    "astro": "7.1.0",
     "cn-font-split": "^7.4.3",
     "echarts": "^6.1.0",
     "es-toolkit": "^1.49.0",
