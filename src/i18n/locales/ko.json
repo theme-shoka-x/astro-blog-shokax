@@ -1,0 +1,244 @@
+{
+  "nav": {
+    "home": "대문",
+    "posts": "게시물",
+    "categories": "카테고리",
+    "tags": "태그",
+    "archives": "아카이브",
+    "statistics": "통계"
+  },
+  "post": {
+    "wordCount": "글자 수",
+    "readingTime": "읽기 시간",
+    "minutes": "분",
+    "words": "자",
+    "author": "작성자",
+    "link": "게시물 링크",
+    "copyright": "저작권",
+    "sticky": "고정된 게시물",
+    "latest": "최신 게시물",
+    "noContent": "게시물이 없어요",
+    "publishedAt": "게시일",
+    "createdAt": "생성일",
+    "updatedAt": "수정일",
+    "previousPost": "이전 게시물",
+    "nextPost": "다음 게시물",
+    "rewardSupport": "후원하기",
+    "rewardDescription": "후원이 창작 활동에 큰 힘이 돼요",
+    "readingNeed": "약",
+    "license": {
+      "text": "이 게시물은",
+      "suffix": " 라이선스에 따라 이용할 수 있으며, 전재 시에는 출처를 밝혀 주세요",
+      "noreprint": "이 게시물은 어떤 형태로도 무단 전재할 수 없어요",
+      "CC-BY-4.0": "크리에이티브 커먼즈 저작자 표시 4.0 국제 (CC BY 4.0)",
+      "CC-BY-SA-4.0": "크리에이티브 커먼즈 저작자 표시-동일조건변경허락 4.0 국제 (CC BY-SA 4.0)",
+      "CC-BY-ND-4.0": "크리에이티브 커먼즈 저작자 표시-변경금지 4.0 국제 (CC BY-ND 4.0)",
+      "CC-BY-NC-4.0": "크리에이티브 커먼즈 저작자 표시-비영리 4.0 국제 (CC BY-NC 4.0)",
+      "CC-BY-NC-SA-4.0": "크리에이티브 커먼즈 저작자 표시-비영리-동일조건변경허락 4.0 국제 (CC BY-NC-SA 4.0)",
+      "CC-BY-NC-ND-4.0": "크리에이티브 커먼즈 저작자 표시-비영리-변경금지 4.0 국제 (CC BY-NC-ND 4.0)"
+    },
+    "encryptedExcerpt": "암호화된 게시물이므로 요약을 표시할 수 없어요."
+  },
+  "category": {
+    "title": "카테고리",
+    "all": "전체",
+    "subcategories": "개의 하위 카테고리",
+    "posts": "개의 게시물",
+    "label": "카테고리",
+    "noContent": "이 카테고리에 게시물이 없어요",
+    "untitled": "제목 없음"
+  },
+  "tag": {
+    "title": "태그"
+  },
+  "archive": {
+    "title": "아카이브",
+    "all": "전체",
+    "year": "년",
+    "month": "월",
+    "excellent": "최고예요!",
+    "great": "훌륭해요!",
+    "good": "좋아요!",
+    "nice": "괜찮네요.",
+    "ok": "그저 그래요.",
+    "emh": "음...",
+    "keepTrying": " 계속 힘내요"
+  },
+  "statistics": {
+    "title": "게시물 통계",
+    "totalPosts": "게시물 수",
+    "totalCategories": "카테고리 수",
+    "totalTags": "태그 수",
+    "topCategory": "가장 많이 사용된 카테고리",
+    "postCount": "게시물 수",
+    "monthlyPosts": "월별 게시 추이",
+    "categoryDistribution": "카테고리별 분포(상위 10개)",
+    "tagDistribution": "태그별 분포(상위 16개)",
+    "latestMonthSummary": "{{month}}에 {{count}}개의 게시물이 게시되었어요."
+  },
+  "sidebar": {
+    "toc": "목차",
+    "overview": "사이트 개요",
+    "author": "작성자",
+    "scrollTop": "맨 위로",
+    "scrollBottom": "맨 아래로",
+    "relatedPosts": "관련 게시물",
+    "state": {
+      "posts": "게시물",
+      "categories": "카테고리",
+      "tags": "태그"
+    },
+    "related": {
+      "noContent": "관련 게시물이 없어요"
+    },
+    "calendar": {
+      "title": "달력",
+      "subtitle": "3단 레이아웃 미리보기",
+      "placeholder": "더 많은 사이드바 콘텐츠가 준비 중이에요"
+    },
+    "search": {
+      "title": "전체 검색",
+      "subtitle": "빠른 콘텐츠 찾기",
+      "action": "검색창 열기",
+      "helper": "기존 Pagefind 검색을 사용하여 게시물, 태그, 키워드를 더 쉽게 찾아보세요."
+    },
+    "moments": {
+      "title": "최근 모먼트",
+      "subtitle": "근황 업데이트"
+    },
+    "randomPosts": {
+      "title": "랜덤 게시물",
+      "subtitle": "새로운 읽을거리"
+    },
+    "tagCloud": {
+      "title": "태그 클라우드",
+      "subtitle": "인기 주제",
+      "browseAll": "모든 태그 보기 →"
+    },
+    "announcement": {
+      "title": "공지사항",
+      "subtitle": "사이트 게시판"
+    },
+    "extra": {
+      "title": "오른쪽 사이드바",
+      "subtitle": "추가 콘텐츠 영역",
+      "empty": "현재 활성화된 오른쪽 사이드바 콘텐츠가 없어요"
+    },
+    "panels": {
+      "contents": "목차",
+      "related": "관련",
+      "overview": "사이트"
+    }
+  },
+  "footer": {
+    "poweredBy": "Powered by",
+    "and": "&",
+    "poweredSuffix": "테마",
+    "totalWordsTitle": "총 글자 수",
+    "estimatedReadingTimeTitle": "예상 읽기 시간",
+    "randomPosts": "랜덤 게시물",
+    "recentComments": "최근 댓글",
+    "noRecentComments": "댓글이 없어요. 첫 댓글을 남겨보세요!",
+    "recentCommentsLoadFailed": "최근 댓글을 불러오지 못했어요. 나중에 다시 시도해 주세요.",
+    "commentAnonymous": "익명",
+    "walineNotConfigured": "Waline 서버 주소가 설정되지 않았어요"
+  },
+  "pagination": {
+    "prev": "이전",
+    "next": "다음"
+  },
+  "button": {
+    "readMore": "더 읽기",
+    "more": "더 보기"
+  },
+  "tags": {
+    "title": "태그",
+    "allTags": "모든 태그",
+    "tagged": "태그"
+  },
+  "common": {
+    "loading": "로딩 중",
+    "more": "더 보기",
+    "total": "총",
+    "home": "대문",
+    "in": "in"
+  },
+  "search": {
+    "devModeSkipped": "현재 개발 모드이므로 Pagefind 로딩을 건너뛰었어요.",
+    "buildHint": "사이트 내 검색을 미리 보려면 먼저 인덱스 생성을 포함한 빌드를 실행하세요."
+  },
+  "encrypted": {
+    "title": "암호화된 게시물",
+    "description": "이 게시물을 보려면 비밀번호가 필요해요",
+    "passwordPlaceholder": "비밀번호 입력",
+    "submit": "해독",
+    "decrypting": "콘텐츠 해독 중...",
+    "error": "비밀번호가 틀렸어요. 다시 시도해 주세요",
+    "passwordRequired": "비밀번호를 입력해 주세요"
+  },
+  "moments": {
+    "title": "모먼트",
+    "noContent": "등록된 모먼트가 없어요",
+    "publishedAt": "게시일",
+    "imageAlt": "모먼트 이미지 {{index}}"
+  },
+  "imageZoom": {
+    "dialog": "이미지 미리보기",
+    "close": "이미지 미리보기 닫기",
+    "previous": "이전 이미지 보기",
+    "next": "다음 이미지 보기"
+  },
+  "random": {
+    "title": "랜덤 게시물",
+    "redirecting": "랜덤 게시물로 이동 중...",
+    "noPost": "이동할 수 있는 게시물이 없어요",
+    "retry": "다시 시도",
+    "noScript": "현재 브라우저에 JavaScript가 활성화되어 있지 않아요. 대문으로 돌아가 직접 게시물을 선택해 주세요."
+  },
+  "aboutDialog": {
+    "defaults": {
+      "title": "빠른 대화",
+      "intro": "대화를 계속하려면 답변 옵션을 선택하세요. 컴포넌트에서 분기와 답변을 미리 정의할 수 있어요.",
+      "authorName": "작성자",
+      "authorInitial": "작",
+      "endHint": "이 대화는 종료되었어요. '다시 시작'을 클릭하여 다시 대화할 수 있어요."
+    },
+    "defaultNodes": {
+      "intro": {
+        "text": "안녕하세요, 설정 가능한 대화 컴포넌트 예시예요. 계속하려면 답변을 선택해 주세요.",
+        "optionA": {
+          "label": "예시 질문 A",
+          "reply": "예시 질문 A에 대한 답변을 보고 싶어요."
+        },
+        "optionB": {
+          "label": "예시 질문 B",
+          "reply": "예시 질문 B에 대한 답변을 보고 싶어요."
+        }
+      },
+      "answerA": {
+        "text": "이건 예시 답변 A예요. 노드 텍스트와 옵션을 원하는 내용으로 바꿀 수 있어요."
+      },
+      "answerB": {
+        "text": "이건 예시 답변 B예요. nodes 속성을 통해 페이지에서 기본 대화를 덮어쓸 수도 있어요."
+      },
+      "backToMenu": {
+        "label": "메뉴로 돌아가기",
+        "reply": "메뉴로 돌아가요."
+      }
+    },
+    "runtime": {
+      "noNodesConfigured": "대화 노드가 설정되지 않았어요.",
+      "branchNotConfigured": "이 분기는 아직 설정되지 않았어요. 다른 옵션을 선택해 주세요.",
+      "noDialogContent": "대화 내용이 없어요. 노드를 먼저 설정해 주세요."
+    },
+    "typing": {
+      "ariaLabel": "입력 중",
+      "peerTyping": "상대방이 입력 중이에요...",
+      "inputPlaceholder": "여기에 메시지를 입력하세요 (데모용 입력란)"
+    },
+    "actions": {
+      "send": "전송",
+      "restart": "다시 시작"
+    }
+  }
+}

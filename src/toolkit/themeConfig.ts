@@ -562,6 +562,7 @@ export interface ShokaXThemeConfig {
    * - "zh-TW"：繁体中文
    * - "ja"：日语
    * - "en"：英文
+   * - "ko"：韩语
    * - 默认为 "zh-CN"
    */
   locale?: Locale;

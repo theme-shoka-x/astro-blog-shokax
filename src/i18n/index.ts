@@ -7,6 +7,7 @@ import zhCN from "./locales/zh-CN.json";
 import zhTW from "./locales/zh-TW.json";
 import ja from "./locales/ja.json";
 import en from "./locales/en.json";
+import ko from "./locales/ko.json";
 
 // Type for supported locales
 export type Locale = ResolvedLocale;
@@ -17,6 +18,7 @@ const resources = {
   "zh-TW": { translation: zhTW },
   ja: { translation: ja },
   en: { translation: en },
+  ko: { translation: ko },
 } as const;
 
 // Get current locale from theme config
