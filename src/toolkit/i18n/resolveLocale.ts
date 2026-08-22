@@ -1,6 +1,6 @@
 export const DEFAULT_LOCALE = "zh-CN" as const;
 
-export const SUPPORTED_LOCALES = [DEFAULT_LOCALE, "zh-TW", "ja", "en"] as const;
+export const SUPPORTED_LOCALES = [DEFAULT_LOCALE, "zh-TW", "ja", "en", "ko"] as const;
 
 export type ResolvedLocale = (typeof SUPPORTED_LOCALES)[number];
 

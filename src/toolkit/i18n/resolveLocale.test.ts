@@ -7,6 +7,7 @@ describe("resolveLocale", () => {
     expect(resolveLocale("zh-TW")).toBe("zh-TW");
     expect(resolveLocale("ja")).toBe("ja");
     expect(resolveLocale("en")).toBe("en");
+    expect(resolveLocale("ko")).toBe("ko");
   });
 
   it("falls back to zh-CN for missing or invalid locale", () => {
