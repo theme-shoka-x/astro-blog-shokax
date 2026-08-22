@@ -15,6 +15,10 @@ export const DEFAULT_THEME_CONFIG: ShokaXThemeConfig = {
       scriptUrl: "",
     },
   },
+  theme: {
+    // 默认主题模式："light" 浅色 / "dark" 深色 / "system" 跟随系统
+    defaultMode: "system",
+  },
   nav: [
     {
       href: "/",

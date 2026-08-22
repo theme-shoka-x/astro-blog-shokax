@@ -238,6 +238,16 @@ interface WidgetsConfig {
   recentCommentsLimit?: number;
 }
 
+interface ThemeConfig {
+  /**
+   * 默认主题模式。
+   * - "light"：默认浅色
+   * - "dark"：默认深色
+   * - "system"：跟随系统
+   */
+  defaultMode?: "light" | "dark" | "system";
+}
+
 interface WalineClientConfig {
   /**
    * Waline 服务端地址。
@@ -614,6 +624,12 @@ export interface ShokaXThemeConfig {
    * - 任一子项未填写时对应脚本不会被注入
    */
   analytics?: AnalyticsConfig;
+
+  /**
+   * 主题外观配置。
+   * - 控制站点首次进入时使用的默认明暗模式
+   */
+  theme?: ThemeConfig;
 
   /**
    * 导航栏配置。

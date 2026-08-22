@@ -1,3 +1,5 @@
+import themeConfig from "@/theme.config";
+
 export type ThemeMode = "light" | "dark";
 
 const STORAGE_KEY = "shokax-color-scheme";
@@ -21,12 +23,20 @@ function getPreferredTheme(win: Window): ThemeMode {
     : "light";
 }
 
+function getDefaultTheme(win: Window): ThemeMode {
+  const defaultMode = themeConfig.theme?.defaultMode ?? "system";
+  if (defaultMode === "light" || defaultMode === "dark") {
+    return defaultMode;
+  }
+  return getPreferredTheme(win);
+}
+
 export function applyTheme(doc: Document, theme: ThemeMode) {
   doc.documentElement.dataset.theme = theme;
 }
 
 export function initTheme(doc: Document, win: Window): ThemeMode {
-  const theme = getStoredTheme(win) ?? getPreferredTheme(win);
+  const theme = getStoredTheme(win) ?? getDefaultTheme(win);
   applyTheme(doc, theme);
   return theme;
 }
