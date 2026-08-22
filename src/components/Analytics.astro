@@ -1,0 +1,72 @@
+---
+import themeConfig from "@/theme.config";
+
+const analyticsConfig = themeConfig.analytics || {};
+const googleAnalyticsId = analyticsConfig.googleAnalytics?.measurementId?.trim();
+const umamiWebsiteId = analyticsConfig.umami?.websiteId?.trim();
+const umamiScriptUrl =
+  analyticsConfig.umami?.scriptUrl?.trim() || "https://cloud.umami.is/script.js";
+const umamiOrigin = umamiWebsiteId
+  ? (() => {
+      try {
+        return new URL(umamiScriptUrl).origin;
+      } catch {
+        return undefined;
+      }
+    })()
+  : undefined;
+const googleAnalyticsInlineScript = googleAnalyticsId
+  ? `
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", ${JSON.stringify(googleAnalyticsId)}, { send_page_view: false });
+
+      let lastTrackedPath = "";
+      function trackPageView() {
+        const path = location.pathname + location.search;
+        if (path === lastTrackedPath) return;
+        lastTrackedPath = path;
+        gtag("event", "page_view", {
+          page_title: document.title,
+          page_location: location.href,
+        });
+      }
+
+      if (document.readyState === "complete") {
+        trackPageView();
+      } else {
+        window.addEventListener("load", trackPageView, { once: true });
+      }
+      document.addEventListener("astro:page-load", trackPageView);
+    `
+  : "";
+---
+
+{
+  googleAnalyticsId && (
+    <>
+      <link rel="preconnect" href="https://www.googletagmanager.com" />
+      <script
+        is:inline
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+      />
+      <script is:inline set:html={googleAnalyticsInlineScript} />
+    </>
+  )
+}
+
+{
+  umamiWebsiteId && (
+    <>
+      {umamiOrigin && <link rel="preconnect" href={umamiOrigin} />}
+      <script
+        is:inline
+        defer
+        src={umamiScriptUrl}
+        data-website-id={umamiWebsiteId}
+      />
+    </>
+  )
+}

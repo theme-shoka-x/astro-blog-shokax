@@ -1,5 +1,6 @@
 ---
 import NavBar from "@/components/navbar/NavBar.svelte";
+import Analytics from "@/components/Analytics.astro";
 import Brand from "@/components/Brand.astro";
 import HeaderCover from "@/components/HeaderCover.astro";
 import Waves from "@/components/Waves.astro";
@@ -169,6 +170,8 @@ import SearchPage from "@/components/search/SearchPage.svelte";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <Analytics />
 
     <slot name="head" />
 

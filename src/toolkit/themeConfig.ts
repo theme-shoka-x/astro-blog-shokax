@@ -175,6 +175,47 @@ interface FooterConfig {
   };
 }
 
+interface GoogleAnalyticsConfig {
+  /**
+   * Google Analytics 4 衡量 ID。
+   * - 例如："G-XXXXXXXXXX"
+   * - 留空或省略时不注入任何 GA 脚本
+   */
+  measurementId?: string;
+}
+
+interface UmamiAnalyticsConfig {
+  /**
+   * Umami 网站 ID。
+   * - 例如："ceed9afc-092e-49aa-b8d3-471312618ff5"
+   * - 留空或省略时不注入 Umami 脚本
+   */
+  websiteId?: string;
+
+  /**
+   * Umami 追踪脚本地址。
+   * - 默认为 Umami 官方云端脚本 "https://cloud.umami.is/script.js"
+   * - 自架 Umami 实例时改为自有网域脚本地址
+   * - 仅在 websiteId 同时填写时生效
+   */
+  scriptUrl?: string;
+}
+
+interface AnalyticsConfig {
+  /**
+   * Google Analytics 4 配置。
+   * - 按 Google 官方 snippet 在 <head> 内联注入 gtag.js（async）+ dataLayer/gtag 引导
+   * - 首次 page_view 等 window load 后上报，并监听 `astro:page-load` 兼容客户端导航
+   */
+  googleAnalytics?: GoogleAnalyticsConfig;
+
+  /**
+   * Umami 网站统计配置。
+   * - Umami 自身追踪 History API 变更，无需额外 SPA 适配
+   */
+  umami?: UmamiAnalyticsConfig;
+}
+
 interface WidgetsConfig {
   /**
    * 是否显示随机文章小部件。
@@ -566,6 +607,13 @@ export interface ShokaXThemeConfig {
    * - 默认为 "zh-CN"
    */
   locale?: Locale;
+
+  /**
+   * 网站分析与统计配置。
+   * - 当前支持 Google Analytics 4 与 Umami
+   * - 任一子项未填写时对应脚本不会被注入
+   */
+  analytics?: AnalyticsConfig;
 
   /**
    * 导航栏配置。
